@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CuisineResponse } from "../app/types/recipe";
+import { CuisineResponse } from '../types/recipe'
 
 const API_KEY = process.env.SPOONACULAR_API_KEY;
 
