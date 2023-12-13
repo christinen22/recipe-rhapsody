@@ -1,0 +1,72 @@
+$breakpoint: (
+  tiny: 320px,
+  small: 576px,
+  medium: 992px,
+  large: 1280px,
+  xlarge: 1680px,
+);
+
+$colors: (
+  background: #F3F0DD,
+  text-dark: #252322,
+  text-light: #FFFFFF,
+  accent: #FFCB16,
+);
+
+$fonts: (
+  primary: 'Roboto'
+);
+
+$fontSizes: (
+  small: 14px,
+  medium: 22px,
+  large: 32px,
+  xlarge: 42px,
+);
+
+@mixin grid-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@mixin flex-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+
+  @include breakpoint(medium) {
+    gap: 24px;
+  }
+
+  @include breakpoint(large) {
+    gap: 32px;
+  }
+}
+
+@mixin flex-column($columns) {
+  flex: 0 0 calc(100% / #{$columns} - 16px); 
+  max-width: calc(100% / #{$columns} - 16px);
+}
+
+:root {
+  @each $query, $value in $breakpoint {
+    --#{$query}: #{$value};
+  }
+
+  @each $color, $value in $colors {
+    --#{$color}: #{$value};
+  }
+
+  @each $font, $value in $fonts {
+    --#{$font}-font: #{$value};
+  }
+
+  @each $size, $value in $fontSizes {
+    --#{$size}-font-size: #{$value};
+  }
+}
+
+
+ 
