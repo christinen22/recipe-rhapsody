@@ -1,6 +1,8 @@
 import axios from "axios";
 import { CuisineResponse } from '../types/recipe'
 
+console.log("API Key:", process.env.SPOONACULAR_API_KEY);
+
 const API_KEY = process.env.SPOONACULAR_API_KEY;
 
 const instance = axios.create({
@@ -18,15 +20,8 @@ const get = async <T>(endpoint: string, config?: any) => {
  * @returns
  */
 export const getCuisine = (query: string) => {
-    const params = {
-        query: query,
-    };
 
-    const headers = {
-        Authorization: `${API_KEY}`,
-    };
-
-    return get<CuisineResponse>('complexSearch', { params, headers });
+    return get<CuisineResponse>(`complexSearch?query=${query}?apiKey=${API_KEY}`);
 };
 
 

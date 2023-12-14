@@ -1,0 +1,64 @@
+
+.body {
+  --breakpoint-tiny: 320px;
+  --breakpoint-small: 576px;
+  --breakpoint-medium: 992px;
+  --breakpoint-large: 1280px;
+  --breakpoint-xlarge: 1680px;
+
+  --background-color: #F3F0DD;
+  --accent-color: #FFCB16;
+  --text-dark: #252322;
+  --text-light: #FEEDED;
+
+  --fonts-primary: 'Roboto', sans-serif;
+
+  --font-size-small: 14px;
+  --font-size-medium: 22px;
+  --font-size-large: 32px;
+  --font-size-xlarge: 42px;
+
+  background: var(--background-color);
+  color: var(--text-dark);
+  font-family: var(--fonts-primary);
+}
+
+/* Mixins using CSS variables */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.selector {
+  animation: fadeIn 1s ease-in-out;
+}
+
+.flex-column {
+  flex: 0 0 calc(100% / var(--columns) - 16px);
+  max-width: calc(100% / var(--columns) - 16px);
+}
+
+.flex-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+
+  @media (min-width: var(--breakpoint-medium)) {
+    gap: 24px;
+  }
+
+  @media (min-width: var(--breakpoint-large)) {
+    gap: 32px;
+  }
+}
+
+.grid-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}

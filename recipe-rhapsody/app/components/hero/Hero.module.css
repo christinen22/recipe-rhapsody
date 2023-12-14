@@ -1,0 +1,11 @@
+@import '../../globals.css';
+
+.heroImage {
+  border-radius: 2rem;
+}
+
+.title {
+  color: var(--text-light);
+  font-size: var(--font-size-xlarge);
+  position: absolute;
+}

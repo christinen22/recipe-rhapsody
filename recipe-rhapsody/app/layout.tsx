@@ -1,6 +1,6 @@
-import Navbar from "./components/Navbar";
-import "./globals.scss";
-import { roboto } from "./fonts";
+import Navbar from "./components/navbar/Navbar";
+import "./globals.css";
+//import { roboto } from "./fonts";
 
 export const metadata = {
   title: "Recipe Rhapsody",
@@ -13,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={roboto.className}>
+      <body className="body">
         <Navbar />
 
         {children}
