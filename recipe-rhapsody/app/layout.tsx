@@ -1,9 +1,11 @@
 import Navbar from "./components/navbar/Navbar";
 import "./globals.css";
+import { Metadata } from "next";
 //import { roboto } from "./fonts";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Recipe Rhapsody",
+  description: "Inspiration for the kitchen",
 };
 
 export default function RootLayout({
