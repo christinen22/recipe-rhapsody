@@ -3,12 +3,17 @@ import { RecipeAnalyzedInstruction, RecipeIngredients, Recipes, RecipeSummary } 
 import { buildQueryParams, getHeaders } from "../utils/helpers";
 
 const baseUrl = 'https://api.spoonacular.com';
+const PAGE_SIZE = 20;
 
-export const getRecipes = cache(async (query = ""): Promise<Recipes> => {
+
+export const getRecipes = cache(async (query = "", page = 1): Promise<Recipes> => {
     const headers = getHeaders();
 
     const params: { [key: string]: string } = {};
     if (query) params.query = query;
+    params.offset = ((page - 1) * PAGE_SIZE).toString();
+    params.number = PAGE_SIZE.toString();
+
     const queryParams = buildQueryParams(params);
 
     const res = await fetch(`${baseUrl}/recipes/complexSearch${queryParams}`, {
@@ -16,32 +21,37 @@ export const getRecipes = cache(async (query = ""): Promise<Recipes> => {
     });
 
     if (!res.ok) {
-
         throw new Error("Failed to fetch data");
     }
 
     return res.json();
 });
 
+
 export const getRecipeSummary = cache(
-    async (recipeId = ""): Promise<RecipeSummary> => {
+    async (recipeId: number): Promise<RecipeSummary> => {
+        if (!recipeId) {
+            throw new Error("Recipe ID is required.");
+        }
+
         const headers = getHeaders();
 
-        const res = await fetch(`${baseUrl}/recipes/${recipeId}/summary`, {
-            headers
+        const res = await fetch(`${baseUrl}/recipes/${recipeId}/information`, {
+            headers,
         });
 
         if (!res.ok) {
-
-            throw new Error("Failed to fetch data");
+            throw new Error(`Failed to fetch data for recipe ID ${recipeId}.`);
         }
 
         return res.json();
     }
 );
 
+
+
 export const getRecipeIngredients = cache(
-    async (recipeId = ""): Promise<RecipeIngredients> => {
+    async (recipeId: number): Promise<RecipeIngredients> => {
         const headers = getHeaders();
 
         const res = await fetch(`${baseUrl}/recipes/${recipeId}/ingredientWidget.json`, {
@@ -59,7 +69,7 @@ export const getRecipeIngredients = cache(
 
 
 export const getRecipeInstructions = cache(
-    async (recipeId = ""): Promise<RecipeAnalyzedInstruction[]> => {
+    async (recipeId: number): Promise<RecipeAnalyzedInstruction[]> => {
         const headers = getHeaders();
 
         const res = await fetch(`${baseUrl}/recipes/${recipeId}/analyzedInstructions`, {

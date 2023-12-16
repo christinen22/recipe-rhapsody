@@ -1,4 +1,4 @@
-import styles from "./styles.module.scss";
+import styles from "./styles.module.css";
 
 export default function CuisineLayout({
   children,

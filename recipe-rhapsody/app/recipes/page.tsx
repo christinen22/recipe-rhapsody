@@ -1,5 +1,13 @@
-function Recipes() {
-  return <div className="recipes">About Recipes</div>;
-}
+import React from "react";
+import RecipeList from "../components/recipelist/RecipeList";
 
-export default Recipes;
+const RecipesPage = () => {
+  return (
+    <div>
+      <h1>Recipes</h1>
+      <RecipeList />
+    </div>
+  );
+};
+
+export default RecipesPage;

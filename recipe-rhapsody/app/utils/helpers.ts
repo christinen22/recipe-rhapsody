@@ -21,6 +21,8 @@ export const buildQueryParams = (params: Record<string, any>) => {
     return queryParams ? `?${queryParams}` : "";
 };
 
+
+//Create and return Header-object to http request
 export const getHeaders = (): Headers => {
     const headers = new Headers();
     headers.append("x-api-key", process.env.NEXT_PUBLIC_SPOONACULAR_API_KEY as string);

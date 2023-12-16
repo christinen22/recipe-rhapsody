@@ -8,6 +8,7 @@ import styles from "./Navbar.module.css";
 const links = [
   { name: "Home", href: "/" },
   { name: "Cuisine", href: "/cuisine" },
+  { name: "Recipes", href: "/recipes" },
 ];
 
 const Navbar: React.FC = () => {
