@@ -7,13 +7,18 @@ import Image from "next/image";
 import { getRecipes } from "../../service/spoonacular";
 import { Recipe } from "../../types/recipe";
 
-const RecipeList = () => {
+type RecipeListProps = {
+  query: string;
+};
+
+const RecipeList = ({ query }: RecipeListProps) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentQuery, setCurrentQuery] = useState<string>(query);
   const [recipes, setRecipes] = useState<Recipe[]>([]);
 
   const fetchRecipes = async (page: number) => {
     try {
-      const res = await getRecipes("", page);
+      const res = await getRecipes(currentQuery, page);
       const newRecipes = res?.results || [];
       setRecipes((prevRecipes) => [...prevRecipes, ...newRecipes]);
     } catch (error) {
@@ -22,8 +27,14 @@ const RecipeList = () => {
   };
 
   useEffect(() => {
+    setRecipes([]);
+    setCurrentQuery(query);
+    setCurrentPage(1);
+  }, [query]);
+
+  useEffect(() => {
     fetchRecipes(currentPage);
-  }, [currentPage]);
+  }, [currentPage, currentQuery]);
 
   const loadMore = () => {
     setCurrentPage((prevPage) => prevPage + 1);

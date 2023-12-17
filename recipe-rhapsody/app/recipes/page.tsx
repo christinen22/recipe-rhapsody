@@ -1,4 +1,3 @@
-import React from "react";
 import RecipeList from "../components/recipelist/RecipeList";
 
 const RecipesPage = () => {

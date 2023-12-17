@@ -1,15 +1,46 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Card, CardGroup } from "react-bootstrap";
+import { Button, Card, CardGroup } from "react-bootstrap";
 import styles from "./styles.module.css";
-import { CuisineResponse } from "../types/recipe";
+import { CuisineResponse, Recipe, Recipes } from "../types/recipe";
 import { getRecipes } from "../service/spoonacular";
 import Link from "next/link";
+import RecipeList from "../components/recipelist/RecipeList";
+
+const cuisines = [
+  "African",
+  "Asian",
+  "American",
+  "British",
+  "Cajun",
+  "Caribbean",
+  "Chinese",
+  "Eastern European",
+  "European",
+  "French",
+  "German",
+  "Greek",
+  "Indian",
+  "Irish",
+  "Italian",
+  "Japanese",
+  "Jewish",
+  "Korean",
+  "Latin American",
+  "Mediterranean",
+  "Mexican",
+  "Middle Eastern",
+  "Nordic",
+  "Southern",
+  "Spanish",
+  "Thai",
+  "Vietnamese",
+];
 
 function CuisineRecipes() {
   const [selectedCuisine, setSelectedCuisine] = useState<string>("");
-  const [recipes, setRecipes] = useState<CuisineResponse | null>(null);
+  const [recipes, setRecipes] = useState<Recipes | null>(null);
 
   useEffect(() => {
     if (selectedCuisine) {
@@ -29,30 +60,21 @@ function CuisineRecipes() {
   return (
     <div className={styles.cuisine}>
       <h2>Recipes by Cuisine</h2>
-      <label>
-        Select Cuisine:
-        <select
-          value={selectedCuisine}
-          onChange={(e) => setSelectedCuisine(e.target.value)}
-        >
-          <option value="indian">Indian</option>
-          <option value="mexican">Mexican</option>
-        </select>
-      </label>
+      <div className={styles.cuisineButtons}>
+        {cuisines.map((cuisine) => (
+          <Button
+            key={cuisine}
+            variant="outline-primary"
+            onClick={() => setSelectedCuisine(cuisine)}
+            active={selectedCuisine === cuisine}
+          >
+            {cuisine}
+          </Button>
+        ))}
+      </div>
 
       {recipes && recipes.results ? (
-        <CardGroup>
-          {recipes.results.map((recipe) => (
-            <Link href={`/recipes/${recipe.id}`}>
-              <Card key={recipe.id}>
-                <Card.Img variant="top" src={recipe.image} alt={recipe.title} />
-                <Card.Body>
-                  <Card.Title>{recipe.title}</Card.Title>
-                </Card.Body>
-              </Card>
-            </Link>
-          ))}
-        </CardGroup>
+        <RecipeList query={selectedCuisine} recipes={recipes.results} />
       ) : (
         <p>No recipes available for the selected cuisine.</p>
       )}
