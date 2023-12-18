@@ -1,10 +1,10 @@
-import RecipeList from "../components/recipelist/RecipeList";
+import RecipeList from "../components/recipe/RecipeList";
 
 const RecipesPage = () => {
   return (
     <div>
       <h1>Recipes</h1>
-      <RecipeList />
+      <RecipeList query="italian" />
     </div>
   );
 };

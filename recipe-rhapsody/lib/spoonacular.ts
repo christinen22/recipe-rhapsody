@@ -1,12 +1,13 @@
 import { cache } from "react";
-import { RecipeAnalyzedInstruction, RecipeIngredients, Recipes, RecipeSummary } from "../types/recipe";
-import { buildQueryParams, getHeaders } from "../utils/helpers";
+import { RecipeAnalyzedInstruction, RecipeIngredients, Recipes, RecipeSummary } from '../app/types/recipe'
+
+import { buildQueryParams, getHeaders } from '../app/utils/helpers'
 
 const baseUrl = 'https://api.spoonacular.com';
 const PAGE_SIZE = 20;
 
 
-export const getRecipes = cache(async (query = "", page = 1): Promise<Recipes> => {
+export const getRecipes = cache(async (query?: string, page = 1): Promise<Recipes> => {
     const headers = getHeaders();
 
     const params: { [key: string]: string } = {};

@@ -1,6 +1,8 @@
 import Navbar from "./components/navbar/Navbar";
 import "./globals.css";
 import { Metadata } from "next";
+import Providers from "../providers";
+import Search from "./components/search/Search";
 //import { roboto } from "./fonts";
 
 export const metadata: Metadata = {
@@ -16,9 +18,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="body">
-        <Navbar />
-
-        {children}
+        <Providers>
+          <Navbar />
+          <Search />
+          {children}
+        </Providers>
       </body>
     </html>
   );

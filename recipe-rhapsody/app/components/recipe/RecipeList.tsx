@@ -1,10 +1,9 @@
 "use client";
-
 import styles from "./RecipeList.module.css";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { getRecipes } from "../../service/spoonacular";
+import { getRecipes } from "../../../lib/spoonacular";
 import { Recipe } from "../../types/recipe";
 
 type RecipeListProps = {
@@ -13,12 +12,11 @@ type RecipeListProps = {
 
 const RecipeList = ({ query }: RecipeListProps) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [currentQuery, setCurrentQuery] = useState<string>(query);
   const [recipes, setRecipes] = useState<Recipe[]>([]);
 
-  const fetchRecipes = async (page: number) => {
+  const fetchRecipes = async (page: number, searchQuery: string) => {
     try {
-      const res = await getRecipes(currentQuery, page);
+      const res = await getRecipes(searchQuery, page);
       const newRecipes = res?.results || [];
       setRecipes((prevRecipes) => [...prevRecipes, ...newRecipes]);
     } catch (error) {
@@ -28,13 +26,12 @@ const RecipeList = ({ query }: RecipeListProps) => {
 
   useEffect(() => {
     setRecipes([]);
-    setCurrentQuery(query);
     setCurrentPage(1);
   }, [query]);
 
   useEffect(() => {
-    fetchRecipes(currentPage);
-  }, [currentPage, currentQuery]);
+    fetchRecipes(currentPage, query);
+  }, [currentPage, query]);
 
   const loadMore = () => {
     setCurrentPage((prevPage) => prevPage + 1);

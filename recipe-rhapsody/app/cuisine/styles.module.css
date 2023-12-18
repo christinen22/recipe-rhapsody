@@ -1,3 +1,26 @@
 .cuisine {
     color: black;
 }
+
+.navList {
+    max-width: 1200px;
+    list-style: none;
+    flex-wrap: wrap;
+    display: flex;
+  }
+  
+  .navLink {
+    text-decoration: none;
+    padding: 10px;
+    color: var(--color);
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .navLink:hover {
+    color: var(--accent-color);
+  }
+  
+  .activeNavLink {
+    color: var(--accent-color);
+    font-weight: bold;
+  }

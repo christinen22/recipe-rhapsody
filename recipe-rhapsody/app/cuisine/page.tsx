@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Card, CardGroup } from "react-bootstrap";
 import styles from "./styles.module.css";
-import { CuisineResponse, Recipe, Recipes } from "../types/recipe";
-import { getRecipes } from "../service/spoonacular";
-import Link from "next/link";
-import RecipeList from "../components/recipelist/RecipeList";
+import { Recipes } from "../types/recipe";
+import { getRecipes } from "../../lib/spoonacular";
+import RecipeList from "../components/recipe/RecipeList";
+import Search from "../components/search/Search";
 
 const cuisines = [
   "African",
@@ -38,21 +38,21 @@ const cuisines = [
   "Vietnamese",
 ];
 
-function CuisineRecipes() {
+function Cuisine() {
   const [selectedCuisine, setSelectedCuisine] = useState<string>("");
   const [recipes, setRecipes] = useState<Recipes | null>(null);
 
   useEffect(() => {
-    if (selectedCuisine) {
-      const fetchRecipes = async () => {
-        try {
-          const data = await getRecipes(selectedCuisine);
-          setRecipes(data);
-        } catch (error) {
-          console.error("Error fetching cuisine:", error);
-        }
-      };
+    const fetchRecipes = async () => {
+      try {
+        const data = await getRecipes(selectedCuisine);
+        setRecipes(data);
+      } catch (error) {
+        console.error("Error fetching cuisine:", error);
+      }
+    };
 
+    if (selectedCuisine) {
       fetchRecipes();
     }
   }, [selectedCuisine]);
@@ -60,21 +60,25 @@ function CuisineRecipes() {
   return (
     <div className={styles.cuisine}>
       <h2>Recipes by Cuisine</h2>
-      <div className={styles.cuisineButtons}>
-        {cuisines.map((cuisine) => (
-          <Button
-            key={cuisine}
-            variant="outline-primary"
-            onClick={() => setSelectedCuisine(cuisine)}
-            active={selectedCuisine === cuisine}
-          >
-            {cuisine}
-          </Button>
-        ))}
+      <div>
+        <ul className={styles.navList}>
+          {cuisines.map((cuisine) => (
+            <li key={cuisine}>
+              <Button
+                onClick={() => setSelectedCuisine(cuisine)}
+                className={`${styles.navLink} ${
+                  selectedCuisine === cuisine ? styles.activeNavLink : ""
+                }`}
+              >
+                {cuisine}
+              </Button>
+            </li>
+          ))}
+        </ul>
       </div>
 
       {recipes && recipes.results ? (
-        <RecipeList query={selectedCuisine} recipes={recipes.results} />
+        <RecipeList query={selectedCuisine} />
       ) : (
         <p>No recipes available for the selected cuisine.</p>
       )}
@@ -82,4 +86,4 @@ function CuisineRecipes() {
   );
 }
 
-export default CuisineRecipes;
+export default Cuisine;
