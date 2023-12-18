@@ -1,4 +1,4 @@
-import Navbar from "./components/navbar/Navbar";
+import Navigation from "./components/navigation/Navigation";
 import "./globals.css";
 import { Metadata } from "next";
 import Providers from "../providers";
@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="body">
         <Providers>
-          <Navbar />
+          <Navigation />
           <Search />
           {children}
         </Providers>
