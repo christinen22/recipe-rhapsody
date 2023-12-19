@@ -8,9 +8,6 @@ import Logo from "../../../public/images/Logo.png";
 import Image from "next/image";
 import { useState } from "react";
 import { FaUser, FaBars } from "react-icons/fa";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
 
 const links = [
   { name: "Home", href: "/" },

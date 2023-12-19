@@ -1,4 +1,4 @@
-import { getRecipes } from "../../../lib/spoonacular";
+/* import { getRecipes } from "../../../lib/spoonacular";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
@@ -11,3 +11,4 @@ export async function GET(request: Request) {
 
     return NextResponse.json({ data });
 }
+ */
