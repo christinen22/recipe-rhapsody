@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Form, Button } from "react-bootstrap";
 import * as API from "../../../lib/spoonacular";
+import styles from "./Search.module.css";
 
 const Search = () => {
   const queryClient = useQueryClient();
@@ -38,7 +39,7 @@ const Search = () => {
   console.log(recipes);
 
   return (
-    <>
+    <div className={styles.container}>
       <Form className="mb-4 search-form" onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="searchQuery">
           <Form.Label>Search Recipe</Form.Label>
@@ -61,7 +62,7 @@ const Search = () => {
           </Button>
         </div>
       </Form>
-    </>
+    </div>
   );
 };
 

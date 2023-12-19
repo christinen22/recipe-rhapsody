@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+import Search from "../search/Search";
 import styles from "./Hero.module.css";
 
 const Hero: React.FC = () => {
@@ -8,13 +8,7 @@ const Hero: React.FC = () => {
       <h1 className={styles.title}>
         Search for you next adventure in the kitchen
       </h1>
-      <Image
-        src="/images/hero-img.jpg"
-        width={1000}
-        height={760}
-        className={styles.heroImage}
-        alt="Image of food"
-      />
+      <Search />
     </div>
   );
 };

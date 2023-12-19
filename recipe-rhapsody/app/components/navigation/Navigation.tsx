@@ -15,7 +15,6 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 const links = [
   { name: "Home", href: "/" },
   { name: "Cuisine", href: "/cuisine" },
-  { name: "Random Recipes", href: "/recipes" },
   { name: "Meal type", href: "/mealtype" },
 ];
 
@@ -32,8 +31,8 @@ const Navigation: React.FC = () => {
   };
 
   return (
-    <Navbar className={styles.navbar}>
-      <Navbar.Brand className={styles.logoContainer}>
+    <nav className={styles.navbar}>
+      <div className={styles.logoContainer}>
         <Image
           src={Logo}
           alt="Recipe Rhapsody logo"
@@ -41,7 +40,7 @@ const Navigation: React.FC = () => {
           placeholder="blur"
           quality={100}
         />
-      </Navbar.Brand>
+      </div>
 
       <div className={clsx(styles.menu, { [styles.menuOpen]: isOpen })}>
         <ul className={clsx(styles.navList, { [styles.mobileMenu]: isOpen })}>
@@ -60,7 +59,7 @@ const Navigation: React.FC = () => {
           ))}
         </ul>
         <div className={styles.icons}>
-          <FaUser className={styles.icon} />
+          {/*  <FaUser className={styles.icon} /> */}
           <FaBars className={styles.icon} onClick={handleClick} />
           <div
             className={clsx(styles.closeButton, {
@@ -72,7 +71,7 @@ const Navigation: React.FC = () => {
           </div>
         </div>
       </div>
-    </Navbar>
+    </nav>
   );
 };
 

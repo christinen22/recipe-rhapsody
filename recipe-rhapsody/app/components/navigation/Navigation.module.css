@@ -1,16 +1,36 @@
-/* Navbar.module.css */
+@import '../../globals.css';
 
-.menu {
+.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px;
+  background-color: var(--background-color);
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+}
+
+.desktopMenu {
+  display: flex;
+  align-items: center;
+
+  @media (max-width: var(--breakpoint-medium)) {
+    display: none;
+  }
 }
 
 .navList {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
+  display: none;
+
+  @media (min-width: 992px){
+    display: flex;
+  }
 }
 
 .navLink {
@@ -29,33 +49,58 @@
   font-weight: bold;
 }
 
-.menuOpen {
-  position: relative;
+
+.mobileIcons {
+  display: flex;
+  align-items: center;
+
+  @media (min-width: var(--breakpoint-medium)) {
+    display: none;
+  }
 }
 
+
+
 .mobileMenu {
+  flex-direction: column;
   position: absolute;
-  top: 60px; /* Adjust as needed */
+  top: 60px;
   left: 0;
   width: 100%;
   background-color: var(--background-color);
-  padding: 10px;
-  display: none; /* Initially hide the menu items */
+  align-items: center;
+
+  @media (min-width: 1250px) {
+    display: none;
+  }
 }
 
 .menuOpen .mobileMenu {
   display: flex;
-  flex-direction: column;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+
+  @media (min-width: 992px) {
+    display: none;
+  }
+}
+
+.icon {
+  cursor: pointer;
+  margin-right: 10px;
 }
 
 .closeButton {
+  cursor: pointer;
   display: none;
+  margin-left: auto;
 }
 
 .menuOpen .closeButton {
   display: block;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
 }
+
+
