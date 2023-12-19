@@ -1,10 +1,12 @@
 import Hero from "./components/hero/Hero";
+import RandomRecipe from "./components/random/RandomRecipe";
+import Search from "./components/search/Search";
 
 function HomePage() {
   return (
     <main>
-      <h2>Recipe Rhapsody</h2>
       <Hero />
+      <RandomRecipe />
     </main>
   );
 }

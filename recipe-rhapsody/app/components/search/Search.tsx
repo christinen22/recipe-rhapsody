@@ -6,6 +6,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Form, Button } from "react-bootstrap";
 import * as API from "../../../lib/spoonacular";
 import styles from "./Search.module.css";
+import { FaMagnifyingGlass } from "react-icons/fa6";
 
 const Search = () => {
   const queryClient = useQueryClient();
@@ -40,27 +41,26 @@ const Search = () => {
 
   return (
     <div className={styles.container}>
-      <Form className="mb-4 search-form" onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="searchQuery">
-          <Form.Label>Search Recipe</Form.Label>
+      <Form className={styles.searchForm} onSubmit={handleSubmit}>
+        <Form.Group controlId="searchQuery">
           <Form.Control
             onChange={(e) => setSearchInput(e.target.value)}
-            placeholder="Enter your search query"
+            placeholder="Search recipe or ingredient"
             required
             type="text"
             value={searchInput}
+            className={styles.input}
           />
         </Form.Group>
 
-        <div className="d-flex justify-content-end">
-          <Button
-            variant="success"
-            type="submit"
-            disabled={!searchInput.trim().length}
-          >
-            Search
-          </Button>
-        </div>
+        <Button
+          variant="success"
+          type="submit"
+          disabled={!searchInput.trim().length}
+          className={styles.button}
+        >
+          <FaMagnifyingGlass />
+        </Button>
       </Form>
     </div>
   );

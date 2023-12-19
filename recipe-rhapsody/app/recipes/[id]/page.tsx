@@ -1,13 +1,16 @@
 "use client";
 
-import { getRecipeSummary } from "../../service/spoonacular";
+import { getRecipeSummary } from "../../../lib/spoonacular";
 import { RecipeSummary } from "../../types/recipe";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import styles from "../styles.module.css";
+import { Button } from "react-bootstrap";
 
 const SingleRecipePage = () => {
   const { id } = useParams();
-  console.log(id);
+  const router = useRouter();
   const [recipe, setRecipe] = useState<RecipeSummary | null>(null);
 
   useEffect(() => {
@@ -30,11 +33,32 @@ const SingleRecipePage = () => {
     return <p>Loading...</p>;
   }
 
+  const goBack = () => {
+    router.back();
+  };
+
   return (
-    <div>
-      <h1>{recipe.title}</h1>
-      <p>{recipe.summary}</p>
-    </div>
+    <>
+      <div>
+        <Button className={styles.goBackButton} onClick={goBack}>
+          Go Back
+        </Button>
+      </div>
+      <div className={styles.container}>
+        <h3 className={styles.heading}>{recipe.title}</h3>
+        <div
+          className={styles.text}
+          dangerouslySetInnerHTML={{ __html: recipe.summary }}
+        />
+        <Image
+          src={recipe.image}
+          alt={recipe.title}
+          width={300}
+          height={300}
+          className={styles.image}
+        />
+      </div>
+    </>
   );
 };
 

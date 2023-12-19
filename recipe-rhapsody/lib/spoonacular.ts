@@ -1,5 +1,5 @@
 import { cache } from "react";
-import { RecipeAnalyzedInstruction, RecipeIngredients, Recipes, RecipeSummary } from '../app/types/recipe'
+import { RecipeAnalyzedInstruction, RecipeIngredients, Recipes, RecipeSummary, Recipe, RandomRecipe } from '../app/types/recipe'
 
 import { buildQueryParams, getHeaders } from '../app/utils/helpers'
 
@@ -27,6 +27,23 @@ export const getRecipes = cache(async (query?: string, page = 1): Promise<Recipe
 
     return res.json();
 });
+
+
+export const getRandomRecipes = async (): Promise<RandomRecipe> => {
+    try {
+        const headers = getHeaders();
+        const res = await fetch(`${baseUrl}/recipes/random`, { headers });
+
+        if (!res.ok) {
+            throw new Error("Failed to fetch data");
+        }
+
+        return res.json();
+    } catch (error) {
+        console.error("Error fetching random recipes:", error);
+        throw error;
+    }
+};
 
 
 export const getRecipeSummary = cache(

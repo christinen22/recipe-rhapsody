@@ -42,7 +42,7 @@
     margin-bottom: 3rem;
   }
   
-  .goBackButton {
+  .button {
     background-color: var(--accent-color);
     color: #ffffff;
     padding: 10px 20px;
@@ -56,3 +56,4 @@
   .button:hover {
     background-color: #ffad00; 
   }
+  

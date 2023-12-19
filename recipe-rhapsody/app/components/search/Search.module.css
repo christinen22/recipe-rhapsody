@@ -1,0 +1,25 @@
+.searchForm {
+    display: flex;
+}
+
+.input {
+    background-color: var(--text-light);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 3rem;
+    border-radius: 1rem;
+
+}
+
+.button {
+    background-color: var(--accent-color);
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.button svg {
+    color: black;
+    padding: 0.3rem;
+}

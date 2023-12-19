@@ -1,4 +1,5 @@
 "use client";
+
 import styles from "./RecipeList.module.css";
 import { useEffect, useState } from "react";
 import Link from "next/link";
