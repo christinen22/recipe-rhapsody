@@ -23,6 +23,14 @@
   margin-bottom: 3rem;
 }
  */
+
+ .welcome {
+    color: var(--text-light);
+    text-align: center;
+    font-size: var(--font-size-small);
+    padding-bottom: 3rem;
+ }
+ 
 .title {
   color: var(--text-light);
   font-size: var(--font-size-large);

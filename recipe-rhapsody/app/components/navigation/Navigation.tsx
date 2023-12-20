@@ -1,5 +1,7 @@
 "use client";
 
+// Navigation.tsx
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
@@ -8,9 +10,6 @@ import Logo from "../../../public/images/Logo.png";
 import Image from "next/image";
 import { useState } from "react";
 import { FaUser, FaBars } from "react-icons/fa";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
 
 const links = [
   { name: "Home", href: "/" },
@@ -18,9 +17,16 @@ const links = [
   { name: "Meal type", href: "/mealtype" },
 ];
 
+const userLinks = [
+  { name: "Login", href: "/user" },
+  { name: "Signup", href: "/user" },
+  { name: "My page", href: "/my-page" },
+];
+
 const Navigation: React.FC = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -28,6 +34,14 @@ const Navigation: React.FC = () => {
 
   const handleClose = () => {
     setIsOpen(false);
+  };
+
+  const handleUserIconClick = () => {
+    setShowUserMenu(!showUserMenu);
+  };
+
+  const handleCloseUserMenu = () => {
+    setShowUserMenu(false);
   };
 
   return (
@@ -58,9 +72,14 @@ const Navigation: React.FC = () => {
             </li>
           ))}
         </ul>
+
         <div className={styles.icons}>
-          {/*  <FaUser className={styles.icon} /> */}
-          <FaBars className={styles.icon} onClick={handleClick} />
+          <div className={styles.userIcon}>
+            <FaUser onClick={handleUserIconClick} />
+          </div>
+          <div className={styles.menuIcon}>
+            <FaBars onClick={handleClick} />
+          </div>
           <div
             className={clsx(styles.closeButton, {
               [styles.menuOpen]: isOpen,
@@ -71,6 +90,25 @@ const Navigation: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {showUserMenu && (
+        <div className={styles.menuOpen}>
+          <ul className={clsx(styles.navList, [styles.mobileMenu])}>
+            {userLinks.map((link) => (
+              <li key={link.name}>
+                <Link
+                  href={link.href}
+                  className={clsx(styles.navLink, {
+                    [styles.activeNavLink]: pathname === link.href,
+                  })}
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </nav>
   );
 };

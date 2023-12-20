@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Button, Card, CardGroup } from "react-bootstrap";
 import styles from "./styles.module.css";
-import { Recipes } from "../types/recipe";
+import { Recipes } from "../../types/recipe";
 import { getRecipes } from "../../lib/spoonacular";
 import RecipeList from "../components/recipe/RecipeList";
 import Search from "../components/search/Search";

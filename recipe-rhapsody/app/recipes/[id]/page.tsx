@@ -1,7 +1,7 @@
 "use client";
 
 import { getRecipeSummary } from "../../../lib/spoonacular";
-import { RecipeSummary } from "../../types/recipe";
+import { RecipeSummary } from "../../../types/recipe";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";

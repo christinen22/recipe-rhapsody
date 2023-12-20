@@ -1,7 +1,7 @@
 import { cache } from "react";
-import { RecipeAnalyzedInstruction, RecipeIngredients, Recipes, RecipeSummary, Recipe, RandomRecipe } from '../app/types/recipe'
+import { RecipeAnalyzedInstruction, RecipeIngredients, Recipes, RecipeSummary, Recipe, RandomRecipe } from '../types/recipe'
 
-import { buildQueryParams, getHeaders } from '../app/utils/helpers'
+import { buildQueryParams, getHeaders } from "../utils/helpers";
 
 const baseUrl = 'https://api.spoonacular.com';
 const PAGE_SIZE = 20;

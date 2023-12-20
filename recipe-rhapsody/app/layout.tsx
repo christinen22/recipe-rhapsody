@@ -2,8 +2,6 @@ import Navigation from "./components/navigation/Navigation";
 import "./globals.css";
 import { Metadata } from "next";
 import Providers from "../providers";
-import Search from "./components/search/Search";
-import RandomRecipe from "./components/random/RandomRecipe";
 import Footer from "./components/footer/Footer";
 //import { roboto } from "./fonts";
 
