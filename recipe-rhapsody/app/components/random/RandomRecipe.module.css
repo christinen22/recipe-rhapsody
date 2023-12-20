@@ -1,5 +1,7 @@
 .title {
     text-align: center;
+    padding-top: 2rem;
+    font-size: var(--font-size-large);
 }
 
 .container {
@@ -12,20 +14,20 @@
     text-align: center;
     display: flex;
     flex-direction: column;
-   align-items: center;
+    align-items: center;
   }
   
   .heading {
     font-size: var(--font-size-medium);
     color: var(--text-dark);
-    padding: 3rem;
+    padding: 2rem;
   }
   
   .text {
     font-size: var(--font-size-small);
     color: var(--text-dark);
-    padding-left: 3rem;
-    padding-right: 3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   .text a {

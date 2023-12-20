@@ -52,8 +52,8 @@ const RandomRecipe = () => {
 
   return (
     <>
-      <h2 className={styles.title}>Random recipe of today</h2>
       <div className={styles.container}>
+        <h2 className={styles.title}>Random recipe of today</h2>
         <h3 className={styles.heading}>{recipe.title}</h3>
         <div
           className={styles.text}

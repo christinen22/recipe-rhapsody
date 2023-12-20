@@ -1,0 +1,35 @@
+.container {
+    background-color: #68C858;
+    background-size: cover;
+    width: 100%;
+    padding-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 2rem;
+    margin-top: 2rem;
+
+}
+
+.text {
+font-size: var(--font-size-large);
+text-align: center;
+padding: 2rem;
+}
+
+.button {
+    background-color: var(--accent-color);
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 2rem;
+    font-size: var(--font-size-small);
+    margin-bottom: 2rem;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
