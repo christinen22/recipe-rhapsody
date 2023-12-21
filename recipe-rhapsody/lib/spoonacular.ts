@@ -47,7 +47,7 @@ export const getRandomRecipes = async (): Promise<RandomRecipe> => {
 
 
 export const getRecipeSummary = cache(
-    async (recipeId: number): Promise<RecipeSummary> => {
+    async (recipeId: number): Promise<Recipe> => {
         if (!recipeId) {
             throw new Error("Recipe ID is required.");
         }

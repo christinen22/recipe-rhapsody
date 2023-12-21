@@ -41,8 +41,8 @@ const RecipeList = ({ query }: RecipeListProps) => {
   return (
     <div className={styles.recipeList}>
       <ul className={styles.cardGrid}>
-        {recipes.map((recipe: Recipe) => (
-          <li key={recipe.id} className={styles.card}>
+        {recipes.map((recipe: Recipe, id) => (
+          <li key={id} className={styles.card}>
             <Link href={`/recipes/${recipe.id}`} className={styles.link}>
               <Image
                 src={recipe.image}
@@ -56,7 +56,9 @@ const RecipeList = ({ query }: RecipeListProps) => {
           </li>
         ))}
       </ul>
-      <button onClick={loadMore}>Load More</button>
+      <button className={styles.button} onClick={loadMore}>
+        Load More
+      </button>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import "./globals.css";
 import { Metadata } from "next";
 import Providers from "../providers";
 import Footer from "./components/footer/Footer";
+import Search from "./components/search/Search";
 //import { roboto } from "./fonts";
 
 export const metadata: Metadata = {
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body className="body">
         <Providers>
           <Navigation />
+          <Search />
           {children}
           <Footer />
         </Providers>

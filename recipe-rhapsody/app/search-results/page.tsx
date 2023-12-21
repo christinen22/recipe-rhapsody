@@ -37,11 +37,7 @@ const SearchResults = () => {
       <h2>Search Results for "{search}"</h2>
       {recipes && recipes.results ? (
         <>
-          <ul className={styles.cardGrid}>
-            {recipes.results.map((recipe: Recipe) => (
-              <RecipeList query={search} />
-            ))}
-          </ul>
+          <RecipeList query={String(search)} />
         </>
       ) : (
         <p>No recipes available based on your search.</p>

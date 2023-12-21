@@ -1,7 +1,7 @@
 "use client";
 
 import { getRecipeSummary } from "../../../lib/spoonacular";
-import { RecipeSummary } from "../../../types/recipe";
+import { Recipe } from "../../../types/recipe";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -11,7 +11,7 @@ import { Button } from "react-bootstrap";
 const SingleRecipePage = () => {
   const { id } = useParams();
   const router = useRouter();
-  const [recipe, setRecipe] = useState<RecipeSummary | null>(null);
+  const [recipe, setRecipe] = useState<Recipe | null>(null);
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -39,7 +39,7 @@ const SingleRecipePage = () => {
 
   return (
     <>
-      <div>
+      <div className={styles.btnContainer}>
         <Button className={styles.goBackButton} onClick={goBack}>
           Go Back
         </Button>

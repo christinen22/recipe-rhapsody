@@ -1,11 +1,12 @@
 "use client";
-
+import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Button, Card, CardGroup } from "react-bootstrap";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { Button } from "react-bootstrap";
 import styles from "./styles.module.css";
-import { Recipes } from "../../types/recipe";
 import { getRecipes } from "../../lib/spoonacular";
-import RecipeList from "../components/recipe/RecipeList";
+import { Recipes } from "../../types/recipe";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const cuisines = [
   "African",
@@ -37,7 +38,11 @@ const cuisines = [
   "Vietnamese",
 ];
 
-function Cuisine() {
+const Cuisine = () => {
+  const searchParams = useSearchParams();
+  const queryClient = useQueryClient();
+  const router = useRouter();
+
   const [selectedCuisine, setSelectedCuisine] = useState<string>("");
   const [recipes, setRecipes] = useState<Recipes | null>(null);
 
@@ -56,6 +61,12 @@ function Cuisine() {
     }
   }, [selectedCuisine]);
 
+  console.log(selectedCuisine);
+
+  const handleClick = () => {
+    router.push(`/cuisine?query=${encodeURIComponent(selectedCuisine)}`);
+  };
+
   return (
     <div className={styles.cuisine}>
       <h2>Recipes by Cuisine</h2>
@@ -63,26 +74,20 @@ function Cuisine() {
         <ul className={styles.navList}>
           {cuisines.map((cuisine) => (
             <li key={cuisine}>
-              <Button
-                onClick={() => setSelectedCuisine(cuisine)}
-                className={`${styles.navLink} ${
-                  selectedCuisine === cuisine ? styles.activeNavLink : ""
-                }`}
-              >
-                {cuisine}
-              </Button>
+              <Link href={`/cuisine/${encodeURIComponent(cuisine)}`} passHref>
+                <Button
+                  onClick={() => handleClick()}
+                  className={styles.navLink}
+                >
+                  {cuisine}
+                </Button>
+              </Link>
             </li>
           ))}
         </ul>
       </div>
-
-      {recipes && recipes.results ? (
-        <RecipeList query={selectedCuisine} />
-      ) : (
-        <p>No recipes available for the selected cuisine.</p>
-      )}
     </div>
   );
-}
+};
 
 export default Cuisine;

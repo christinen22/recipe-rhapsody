@@ -15,7 +15,11 @@ const Popular = () => {
       <h2 className={styles.title}>Popular Categories</h2>
       <div className={styles.cuisineCard}>
         {cuisines.map((cuisine) => (
-          <Link href={`/cuisine`} className={styles.link}>
+          <Link
+            href={`/cuisine/${encodeURIComponent(cuisine.name)}`}
+            className={styles.link}
+            passHref
+          >
             <div key={cuisine.name} className={styles.cuisineCard}>
               <img src={cuisine.image} alt={cuisine.name} />
               <p className={styles.cuisineTitle}>{cuisine.name}</p>
