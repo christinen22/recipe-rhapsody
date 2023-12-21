@@ -30,12 +30,17 @@
     text-align: center;
     font-size: var(--font-size-small);
     padding-bottom: 3rem;
+    padding-top: 1rem;
  }
  
 .title {
   color: var(--text-light);
   font-size: var(--font-size-large);
+  padding-bottom: 3rem;
   text-align: center;
-  padding-bottom: 5rem;
+
+  @media (min-width: 992px) {
+    font-size: var(--font-size-xlarge);
+  }
   
 }

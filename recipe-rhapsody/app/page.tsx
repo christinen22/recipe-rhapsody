@@ -1,4 +1,5 @@
 import Hero from "./components/hero/Hero";
+import Popular from "./components/popular/Popular";
 import RandomRecipe from "./components/random/RandomRecipe";
 import Register from "./components/register/Register";
 import Search from "./components/search/Search";
@@ -7,8 +8,9 @@ function HomePage() {
   return (
     <main>
       <Hero />
-      <RandomRecipe />
+      <Popular />
       <Register />
+      <RandomRecipe />
     </main>
   );
 }

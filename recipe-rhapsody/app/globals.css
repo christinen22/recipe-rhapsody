@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Julius+Sans+One&family=Open+Sans:wght@300&family=Rubik+Vinyl&family=Shadows+Into+Light&display=swap');
+
 
 .body {
   --breakpoint-tiny: 320px;
@@ -11,7 +13,7 @@
   --text-dark: #252322;
   --text-light: #FEEDED;
 
-  --fonts-primary: 'Roboto', sans-serif;
+  --fonts-primary: 'Poppins', sans-serif;
 
   --font-size-small: 14px;
   --font-size-medium: 22px;

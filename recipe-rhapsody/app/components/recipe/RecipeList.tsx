@@ -43,7 +43,7 @@ const RecipeList = ({ query }: RecipeListProps) => {
       <ul className={styles.cardGrid}>
         {recipes.map((recipe: Recipe) => (
           <li key={recipe.id} className={styles.card}>
-            <Link href={`/recipes/${recipe.id}`}>
+            <Link href={`/recipes/${recipe.id}`} className={styles.link}>
               <Image
                 src={recipe.image}
                 alt={recipe.title}

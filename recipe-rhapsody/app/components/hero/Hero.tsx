@@ -22,9 +22,9 @@ const Hero: React.FC = async () => {
           {user.email}
         </span>
       )}
-      <h1 className={styles.title}>
+      <h2 className={styles.title}>
         Search for you next adventure in the kitchen
-      </h1>
+      </h2>
       <Search />
     </div>
   );

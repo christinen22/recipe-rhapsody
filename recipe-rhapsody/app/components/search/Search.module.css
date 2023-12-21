@@ -1,5 +1,6 @@
 .searchForm {
     display: flex;
+    padding-bottom: 2rem;
 }
 
 .input {

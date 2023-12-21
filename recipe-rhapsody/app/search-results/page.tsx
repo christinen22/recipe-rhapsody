@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Recipe, Recipes } from "../../types/recipe";
 import { getRecipes } from "../../lib/spoonacular";
+import RecipeList from "../components/recipe/RecipeList";
 import Image from "next/image";
 import styles from "./styles.module.css";
 import Link from "next/link";
@@ -38,18 +39,7 @@ const SearchResults = () => {
         <>
           <ul className={styles.cardGrid}>
             {recipes.results.map((recipe: Recipe) => (
-              <li key={recipe.id} className={styles.card}>
-                <Link href={`/recipes/${recipe.id}`}>
-                  <Image
-                    src={recipe.image}
-                    alt={recipe.title}
-                    width={200}
-                    height={200}
-                    className={styles.image}
-                  />
-                  <h3 className={styles.title}>{recipe.title}</h3>
-                </Link>
-              </li>
+              <RecipeList query={search} />
             ))}
           </ul>
         </>
