@@ -23,28 +23,20 @@
   .heading {
     font-size: var(--font-size-medium);
     color: var(--text-dark);
-    padding: 3rem;
+    text-transform: uppercase;
+
   }
   
   .text {
     font-size: var(--font-size-small);
     color: var(--text-dark);
-    padding-left: 3rem;
-    padding-right: 3rem;
+    padding-top: 2rem;
   }
 
   .text a {
     text-decoration: none;
     color: var(--text-dark);
     font-style: italic;
-  }
-  
-  .image {
-    width: 100%;
-    height: auto;
-    border-radius: 2rem;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
   }
   
   .goBackButton {
@@ -60,4 +52,21 @@
   
   .button:hover {
     background-color: #ffad00; 
+  }
+
+  .ingredients {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+  }
+
+  .ingredientsLi {
+
+    padding-right: 0.3rem;
+
+  }
+
+  .ingredientsOl {
+    margin-bottom: 1rem;
+
   }

@@ -46,16 +46,41 @@ const SingleRecipePage = () => {
       </div>
       <div className={styles.container}>
         <h3 className={styles.heading}>{recipe.title}</h3>
-        <div
-          className={styles.text}
-          dangerouslySetInnerHTML={{ __html: recipe.summary }}
-        />
         <Image
           src={recipe.image}
           alt={recipe.title}
           width={300}
-          height={300}
-          className={styles.image}
+          height={200}
+          style={{
+            objectFit: "contain",
+            margin: "2rem",
+          }}
+        />
+        <span className={styles.recipes}>
+          Ready in {recipe.readyInMinutes} minutes.
+        </span>
+        <span className={styles.recipes}>{recipe.servings} servings.</span>
+        <div className={styles.ingredients}>
+          {recipe.extendedIngredients.map((ingredients) => (
+            <>
+              <div className={styles.ingredientsOl}>
+                <span className={styles.ingredientsLi}>
+                  {ingredients.amount}
+                </span>
+                <span className={styles.ingredientsLi}>{ingredients.unit}</span>
+                <span className={styles.ingredientsLi}>{ingredients.name}</span>
+                <br />
+              </div>
+            </>
+          ))}
+        </div>
+        <span
+          className={styles.recipes}
+          dangerouslySetInnerHTML={{ __html: recipe.instructions }}
+        />
+        <div
+          className={styles.text}
+          dangerouslySetInnerHTML={{ __html: recipe.summary }}
         />
       </div>
     </>
