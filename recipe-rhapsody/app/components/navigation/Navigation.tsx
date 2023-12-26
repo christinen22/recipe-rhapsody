@@ -18,8 +18,8 @@ const links = [
 ];
 
 const userLinks = [
-  { name: "Login", href: "/user" },
-  { name: "Signup", href: "/user" },
+  { name: "Login", href: "/login" },
+  { name: "Signup", href: "/signup" },
   { name: "My page", href: "/my-page" },
 ];
 

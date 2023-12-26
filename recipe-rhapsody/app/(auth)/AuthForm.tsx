@@ -34,7 +34,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ handleSubmit }) => {
           required
         />
       </label>
-      <Button>Submit</Button>
+      <Button type="submit">Submit</Button>
     </form>
   );
 };
