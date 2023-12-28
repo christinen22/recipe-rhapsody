@@ -24,6 +24,7 @@ const Welcome: React.FC = () => {
           setUser({
             email: data.session.user.email || "",
           });
+          console.log("User:", data.session.user.email);
         }
       } catch (error) {
         console.error("Error checking user:", error);

@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "../styles.module.css";
 import { Button } from "react-bootstrap";
+import Welcome from "../../components/users/Welcome";
+import SaveRecipeButton from "../../components/SaveRecipeBtn";
 
 const SingleRecipePage = () => {
   const { id } = useParams();
@@ -37,6 +39,8 @@ const SingleRecipePage = () => {
     router.back();
   };
 
+  console.log("Recipe:", recipe?.title);
+
   return (
     <>
       <div className={styles.btnContainer}>
@@ -44,6 +48,8 @@ const SingleRecipePage = () => {
           Go Back
         </Button>
       </div>
+      <Welcome />
+      <SaveRecipeButton recipe={recipe} />
       <div className={styles.container}>
         <h3 className={styles.heading}>{recipe.title}</h3>
         <Image
@@ -61,17 +67,13 @@ const SingleRecipePage = () => {
         </span>
         <span className={styles.recipes}>{recipe.servings} servings.</span>
         <div className={styles.ingredients}>
-          {recipe.extendedIngredients.map((ingredients) => (
-            <>
-              <div className={styles.ingredientsOl}>
-                <span className={styles.ingredientsLi}>
-                  {ingredients.amount}
-                </span>
-                <span className={styles.ingredientsLi}>{ingredients.unit}</span>
-                <span className={styles.ingredientsLi}>{ingredients.name}</span>
-                <br />
-              </div>
-            </>
+          {recipe.extendedIngredients.map((ingredients, ingredients_id) => (
+            <div className={styles.ingredientsOl} key={ingredients_id}>
+              <span className={styles.ingredientsLi}>{ingredients.amount}</span>
+              <span className={styles.ingredientsLi}>{ingredients.unit}</span>
+              <span className={styles.ingredientsLi}>{ingredients.name}</span>
+              <br />
+            </div>
           ))}
         </div>
         <span
