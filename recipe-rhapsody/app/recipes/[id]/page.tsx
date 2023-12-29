@@ -49,7 +49,6 @@ const SingleRecipePage = () => {
         </Button>
       </div>
       <Welcome />
-      <SaveRecipeButton recipe={recipe} />
       <div className={styles.container}>
         <h3 className={styles.heading}>{recipe.title}</h3>
         <Image

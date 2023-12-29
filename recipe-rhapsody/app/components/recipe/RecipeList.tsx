@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getRecipes } from "../../../lib/spoonacular";
 import { Recipe } from "../../../types/recipe";
+import SaveRecipeButton from "../SaveRecipeBtn";
 
 type RecipeListProps = {
   query: string;
@@ -53,6 +54,7 @@ const RecipeList = ({ query }: RecipeListProps) => {
               />
               <h3 className={styles.title}>{recipe.title}</h3>
             </Link>
+            <SaveRecipeButton recipe={recipe} />
           </li>
         ))}
       </ul>
