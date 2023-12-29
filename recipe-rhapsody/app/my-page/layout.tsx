@@ -1,9 +1,8 @@
-import Link from "next/link";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
-export default async function AuthLayout({
+export default async function MyPageLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -11,8 +10,10 @@ export default async function AuthLayout({
   const supabase = createServerComponentClient({ cookies });
   const { data } = await supabase.auth.getSession();
 
-  if (data.session) {
-    redirect("/");
+  if (!data.session) {
+    console.log("no user logged in?", data);
+  } else {
+    console.log("user logged in", data);
   }
 
   return <>{children}</>;

@@ -43,3 +43,8 @@
     text-transform: uppercase;
     margin-bottom: 2rem;
   }
+
+  .login {
+    text-align: center;
+    margin-bottom: 0;
+  }

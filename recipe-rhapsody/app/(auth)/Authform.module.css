@@ -1,0 +1,25 @@
+.form {
+    display: flex;
+    flex-direction: column;
+align-items: flex-start;
+
+    
+}
+
+.formHeading {
+    margin-right: 1rem;
+}
+
+
+
+.group {
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+}
+
+.submitButton {
+    background-color: var(--accent-color);
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+}

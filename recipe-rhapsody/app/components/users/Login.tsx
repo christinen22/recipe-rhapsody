@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import styles from "./Users.module.css";
+import Link from "next/link";
 
 import AuthForm from "../../(auth)/AuthForm";
 
@@ -32,10 +34,14 @@ export default function Login() {
   };
   [];
   return (
-    <main>
-      <h2 className="text-center">Login</h2>
+    <main className={styles.container}>
+      <h2 className={styles.title}>Login</h2>
 
       <AuthForm handleSubmit={handleSubmit} />
+
+      <p className={styles.login}>
+        Not a user yet? <Link href="/signup">Signup!</Link>
+      </p>
 
       {error && <div className="error">{error}</div>}
     </main>
