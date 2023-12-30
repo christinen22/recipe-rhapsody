@@ -9,6 +9,7 @@ interface AddRecipeResponse {
   error?: string;
 }
 
+
 export async function addRecipe(recipe: Recipe): Promise<AddRecipeResponse> {
 
   const supabase = createServerActionClient({ cookies });
@@ -32,6 +33,45 @@ export async function addRecipe(recipe: Recipe): Promise<AddRecipeResponse> {
   }
 }
 
+// Function to add a recipe to the shopping list
+export async function addToShoppingList(recipe: Recipe): Promise<AddRecipeResponse> {
+
+  const supabase = createServerActionClient({ cookies });
+
+  // Get the current user session
+  const { data: { session } } = await supabase.auth.getSession();
+
+  try {
+    // Map through extendedIngredients and create an array of ingredients
+    const ingredientsArray = recipe.extendedIngredients.map((ingredient) => ({
+      name: ingredient.name,
+    }));
+
+    console.log(ingredientsArray)
+
+    // Insert the recipe into the shopping_list table
+    const { error } = await supabase.from("shopping_list").insert([
+      {
+        user_email: session?.user.email,
+        recipe_id: recipe.id,
+        ingredients: ingredientsArray,
+      },
+    ]);
+
+
+
+    // Check for errors and throw an exception if there is one
+    if (error) {
+      throw new Error('Could not add ingredients.');
+    }
+
+    // Return success if there are no errors
+    return { success: true };
+  } catch (error) {
+    // Return an error response if there's an exception
+    return { success: false, error: 'Internal Server Error' };
+  }
+}
 
 
 /* export async function deleterecipe(id) {

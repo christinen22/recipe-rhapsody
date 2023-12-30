@@ -3,6 +3,7 @@
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { Button } from "react-bootstrap";
+import styles from "./Users.module.css";
 
 const Logout = () => {
   const router = useRouter();
@@ -20,7 +21,9 @@ const Logout = () => {
   };
   return (
     <div>
-      <Button onClick={handleLogout}>Logout</Button>
+      <Button className={styles.submitButton} onClick={handleLogout}>
+        Logout
+      </Button>
     </div>
   );
 };

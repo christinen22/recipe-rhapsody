@@ -7,13 +7,18 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "../styles.module.css";
 import { Button } from "react-bootstrap";
-import Welcome from "../../components/users/Welcome";
-import SaveRecipeButton from "../../components/SaveRecipeBtn";
+import SaveRecipeButton from "./SaveRecipeBtn";
+import Link from "next/link";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { addToShoppingList } from "../../../utils/actions";
+import ShoppingListBtn from "./ShoppingListBtn";
 
 const SingleRecipePage = () => {
   const { id } = useParams();
   const router = useRouter();
   const [recipe, setRecipe] = useState<Recipe | null>(null);
+
+  const supabase = createClientComponentClient();
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -39,16 +44,14 @@ const SingleRecipePage = () => {
     router.back();
   };
 
-  console.log("Recipe:", recipe?.title);
-
   return (
     <>
       <div className={styles.btnContainer}>
         <Button className={styles.goBackButton} onClick={goBack}>
           Go Back
         </Button>
+        <SaveRecipeButton recipe={recipe} />
       </div>
-      <Welcome />
       <div className={styles.container}>
         <h3 className={styles.heading}>{recipe.title}</h3>
         <Image
@@ -74,6 +77,10 @@ const SingleRecipePage = () => {
               <br />
             </div>
           ))}
+          <ShoppingListBtn recipe={recipe} />
+          <Link href="/my-page/shoppinglist" className={styles.goBackButton}>
+            View Shopping List
+          </Link>
         </div>
         <span
           className={styles.recipes}

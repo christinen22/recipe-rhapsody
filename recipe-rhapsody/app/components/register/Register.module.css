@@ -26,10 +26,17 @@ padding: 4rem 3rem;
     padding: 0.5rem 2rem;
     font-size: var(--font-size-small);
     margin-bottom: 2rem;
+    cursor: pointer;
 }
+
+.button:hover {
+    background-color: #ffad00; 
+  }
+  
 
 .buttons {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
+

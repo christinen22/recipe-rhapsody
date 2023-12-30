@@ -18,7 +18,12 @@
     border-radius: 2rem;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
+.button:hover {
+    background-color: #ffad00; 
+  }
+  
 
 .button svg {
     color: black;

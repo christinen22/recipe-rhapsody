@@ -5,10 +5,9 @@ import Logout from "../components/users/Logout";
 import getMyRecipes from "../components/users/MyRecipes";
 import styles from "./styles.module.css";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { Recipe } from "../../types/recipe";
+import { Recipe, User } from "../../types/recipe";
 import Link from "next/link";
 import Image from "next/image";
-import { User } from "../../types/recipe";
 import Login from "../components/users/Login";
 
 const MyPage = () => {
@@ -17,30 +16,26 @@ const MyPage = () => {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    const checkUser = async () => {
+    const fetchData = async () => {
+      // Check user authentication status
       const { data } = await supabase.auth.getSession();
+      if (data?.session?.user) {
+        const userEmail = data.session.user.email;
 
-      if (!data?.session?.user) {
-        console.log("no user");
-      } else {
-        setUser({
-          email: data.session.user.email || "",
-        });
-        console.log("User Welcome:", data.session.user.email);
+        // Fetch user-specific recipes
+        try {
+          const userRecipes = await getMyRecipes(String(userEmail));
+          setRecipes(userRecipes);
+          setUser({
+            email: data.session.user.email || "",
+          });
+        } catch (error) {
+          console.error("Error fetching user recipes:", error);
+        }
       }
     };
 
-    const fetchRecipes = async () => {
-      try {
-        const data = await getMyRecipes();
-        setRecipes(data);
-      } catch (error) {
-        console.error("Error fetching recipes:", error);
-      }
-    };
-
-    fetchRecipes();
-    checkUser();
+    fetchData();
   }, []);
 
   return (
@@ -51,8 +46,8 @@ const MyPage = () => {
           <h1>My Saved Recipes</h1>
           {recipes ? (
             <ul className={styles.cardGrid}>
-              {recipes.map((recipe: Recipe, title) => (
-                <li key={title} className={styles.card}>
+              {recipes.map((recipe: Recipe, index) => (
+                <li key={index} className={styles.card}>
                   <Link href={`/recipes/${recipe.id}`} className={styles.link}>
                     <Image
                       src={recipe.image}

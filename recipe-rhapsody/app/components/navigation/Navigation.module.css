@@ -13,7 +13,7 @@
   align-items: center;
 }
 
-.desktopMenu {
+.menu {
   display: flex;
   align-items: center;
 
@@ -33,11 +33,6 @@
   }
 }
 
-.userMenu li {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
 
 .navLink {
   text-decoration: none;
@@ -55,16 +50,6 @@
   font-weight: bold;
 }
 
-.userMenu {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 60px;
-  left: 0;
-  width: 100%;
-  background-color: var(--background-color);
-  align-items: center;
-}
 
 .mobileMenu {
   flex-direction: column;
@@ -92,10 +77,17 @@
 }
 
 
-.menuIcon, .userIcon {
+.menuIcon {
   cursor: pointer;
-  margin-right: 10px;
+  margin-right: 1rem;
 
+}
+
+.userIcon {
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-right: 1rem;
+  margin-left: 1rem;
 }
 
 .menuIcon svg {

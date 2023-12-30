@@ -4,11 +4,11 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { getRecipeSummary } from "../../../lib/spoonacular";
 
-const getMyRecipes = async (userEmail: string) => {
+const getMyShoppingList = async (userEmail: string) => {
   const supabase = createServerComponentClient({ cookies });
 
   const { data, error } = await supabase
-    .from("recipes")
+    .from("shopping_list")
     .select()
     .eq("user_email", userEmail); // Filter recipes by user email
 
@@ -17,7 +17,7 @@ const getMyRecipes = async (userEmail: string) => {
     return [];
   }
 
-  const recipes = await Promise.all(
+  const ingredients = await Promise.all(
     data.map(async (savedRecipe) => {
       try {
         // get details from Spoonacular based on recipe id in Supabase
@@ -33,7 +33,7 @@ const getMyRecipes = async (userEmail: string) => {
   );
 
   // Filter out any recipes with errors
-  return recipes.filter((recipe) => recipe !== null);
+  return ingredients.filter((recipe) => recipe !== null);
 };
 
-export default getMyRecipes;
+export default getMyShoppingList;

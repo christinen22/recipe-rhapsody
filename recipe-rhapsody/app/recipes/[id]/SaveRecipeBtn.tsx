@@ -1,5 +1,7 @@
-import { addRecipe } from "../../utils/actions";
-import { Recipe } from "../../types/recipe";
+import { addRecipe } from "../../../utils/actions";
+import { Recipe } from "../../../types/recipe";
+import { Button } from "react-bootstrap";
+import styles from "../styles.module.css";
 
 interface SaveRecipeButtonProps {
   recipe: Recipe;
@@ -26,7 +28,11 @@ const SaveRecipeButton: React.FC<SaveRecipeButtonProps> = ({ recipe }) => {
     }
   };
 
-  return <button onClick={handleAddRecipeClick}>Add Recipe</button>;
+  return (
+    <Button className={styles.addBtn} onClick={handleAddRecipeClick}>
+      Add Recipe
+    </Button>
+  );
 };
 
 export default SaveRecipeButton;
