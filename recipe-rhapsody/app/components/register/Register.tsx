@@ -9,7 +9,7 @@ const Register = () => {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push("/user");
+    router.push("/login");
   };
 
   return (

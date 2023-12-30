@@ -1,9 +1,4 @@
-
-.recipeList {
-    margin: 20px;
-  }
-  
-  .cardGrid {
+.cardGrid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 16px;
@@ -49,14 +44,7 @@
     margin-bottom: 2rem;
   }
 
-  .addBtn {
-    background-color: var(--accent-color);
-    border-radius: 0.5rem;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    margin-top: 1rem;
-    padding: 0.3rem;
-    border: none;
-    margin: 1rem;
+  .login {
+    text-align: center;
+    margin-bottom: 0;
   }

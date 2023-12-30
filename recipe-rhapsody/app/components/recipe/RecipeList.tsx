@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getRecipes } from "../../../lib/spoonacular";
 import { Recipe } from "../../../types/recipe";
+import SaveRecipeButton from "../../recipes/[id]/SaveRecipeBtn";
 
 type RecipeListProps = {
   query: string;

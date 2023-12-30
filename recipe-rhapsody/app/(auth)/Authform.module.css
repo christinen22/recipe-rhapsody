@@ -1,0 +1,34 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+
+    @media (min-width: 866px) {
+        align-items: center;
+      }
+}
+
+.formHeading {
+    margin-right: 1rem;
+}
+
+
+.group {
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+}
+
+.submitButton {
+    background-color: var(--accent-color);
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.submitButton:hover {
+    background-color: #ffad00; 
+  }
+  

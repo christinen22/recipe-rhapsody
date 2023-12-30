@@ -37,8 +37,6 @@ const Search = () => {
     router.push(`/search-results?query=${encodeURIComponent(searchInput)}`);
   };
 
-  console.log(recipes);
-
   return (
     <div className={styles.container}>
       <Form className={styles.searchForm} onSubmit={handleSubmit}>

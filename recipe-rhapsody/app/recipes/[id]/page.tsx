@@ -7,11 +7,18 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "../styles.module.css";
 import { Button } from "react-bootstrap";
+import SaveRecipeButton from "./SaveRecipeBtn";
+import Link from "next/link";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { addToShoppingList } from "../../../utils/actions";
+import ShoppingListBtn from "./ShoppingListBtn";
 
 const SingleRecipePage = () => {
   const { id } = useParams();
   const router = useRouter();
   const [recipe, setRecipe] = useState<Recipe | null>(null);
+
+  const supabase = createClientComponentClient();
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -43,6 +50,7 @@ const SingleRecipePage = () => {
         <Button className={styles.goBackButton} onClick={goBack}>
           Go Back
         </Button>
+        <SaveRecipeButton recipe={recipe} />
       </div>
       <div className={styles.container}>
         <h3 className={styles.heading}>{recipe.title}</h3>
@@ -61,18 +69,18 @@ const SingleRecipePage = () => {
         </span>
         <span className={styles.recipes}>{recipe.servings} servings.</span>
         <div className={styles.ingredients}>
-          {recipe.extendedIngredients.map((ingredients) => (
-            <>
-              <div className={styles.ingredientsOl}>
-                <span className={styles.ingredientsLi}>
-                  {ingredients.amount}
-                </span>
-                <span className={styles.ingredientsLi}>{ingredients.unit}</span>
-                <span className={styles.ingredientsLi}>{ingredients.name}</span>
-                <br />
-              </div>
-            </>
+          {recipe.extendedIngredients.map((ingredients, ingredients_id) => (
+            <div className={styles.ingredientsOl} key={ingredients_id}>
+              <span className={styles.ingredientsLi}>{ingredients.amount}</span>
+              <span className={styles.ingredientsLi}>{ingredients.unit}</span>
+              <span className={styles.ingredientsLi}>{ingredients.name}</span>
+              <br />
+            </div>
           ))}
+          <ShoppingListBtn recipe={recipe} />
+          <Link href="/my-page/shoppinglist" className={styles.goBackButton}>
+            View Shopping List
+          </Link>
         </div>
         <span
           className={styles.recipes}

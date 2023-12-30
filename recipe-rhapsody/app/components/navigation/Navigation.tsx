@@ -1,7 +1,5 @@
 "use client";
 
-// Navigation.tsx
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
@@ -10,6 +8,7 @@ import Logo from "../../../public/images/Logo.png";
 import Image from "next/image";
 import { useState } from "react";
 import { FaUser, FaBars } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 const links = [
   { name: "Home", href: "/" },
@@ -17,16 +16,11 @@ const links = [
   { name: "Meal type", href: "/mealtype" },
 ];
 
-const userLinks = [
-  { name: "Login", href: "/user" },
-  { name: "Signup", href: "/user" },
-  { name: "My page", href: "/my-page" },
-];
-
 const Navigation: React.FC = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const router = useRouter();
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -37,11 +31,7 @@ const Navigation: React.FC = () => {
   };
 
   const handleUserIconClick = () => {
-    setShowUserMenu(!showUserMenu);
-  };
-
-  const handleCloseUserMenu = () => {
-    setShowUserMenu(false);
+    router.push("/my-page");
   };
 
   return (
@@ -90,7 +80,7 @@ const Navigation: React.FC = () => {
           </div>
         </div>
       </div>
-
+      {/* 
       {showUserMenu && (
         <div className={styles.menuOpen}>
           <ul className={clsx(styles.navList, [styles.mobileMenu])}>
@@ -108,7 +98,7 @@ const Navigation: React.FC = () => {
             ))}
           </ul>
         </div>
-      )}
+      )} */}
     </nav>
   );
 };

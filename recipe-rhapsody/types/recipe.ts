@@ -14,6 +14,12 @@ export type Recipes = {
     results: Recipe[];
 };
 
+export type ExtendedIngredients = {
+    name: string,
+    amount: number,
+    unit: string,
+}
+
 export type RandomRecipe = {
     recipes: Recipe[]
 }
@@ -62,11 +68,6 @@ type Equipment = {
     image: string;
 };
 
-export type ExtendedIngredients = {
-    name: string,
-    amount: number,
-    unit: string,
-}
 
 export type Cuisine = {
     id: number,
@@ -76,4 +77,8 @@ export type Cuisine = {
 
 export type CuisineResponse = {
     results: Cuisine[]
+}
+
+export type User = {
+    email: string,
 }

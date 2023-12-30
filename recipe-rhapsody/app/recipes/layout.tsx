@@ -1,9 +1,7 @@
-import styles from "./styles.module.css";
-
-export default function RecipesLayout({
+export default async function RecipesLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <section className={styles.recipes}>{children}</section>;
+  return <>{children}</>;
 }
