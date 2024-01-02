@@ -5,7 +5,6 @@
   linear-gradient(90deg, #33333388 0%, #33333388 100%),
   url('../../../public/images/hero-img.jpg');
   background-size: cover;
-  aspect-ratio: 1/1;
   width: 100%;
   display: flex;
   margin-top: 2rem;
@@ -15,15 +14,6 @@
   border-radius: 2rem;
 }
 
-/* .heroImage {
-  width: 100%;
-  height: 25vw;
-  object-fit: cover;
-  border-radius: 2rem;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-}
- */
 
  .welcome {
     color: var(--text-light);

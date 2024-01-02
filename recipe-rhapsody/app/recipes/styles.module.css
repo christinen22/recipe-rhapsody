@@ -41,19 +41,22 @@
   }
   
   .goBackButton {
-    background-color: var(--accent-color);
+    background-color: #FE6464;
+    text-transform: uppercase;
+    color: var(--text-light);
+    border: none;
     border-radius: 2rem;
     display: flex;
+    align-items: center;
     padding: 0.5rem 2rem;
     font-size: var(--font-size-small);
     margin-bottom: 2rem;
-    text-transform: uppercase;
-    border: none;
+    cursor: pointer;
     margin-right: 1rem;
   }
   
-  .button:hover {
-    background-color: #ffad00; 
+  .goBackButton:hover {
+    background-color: #fc3535;
   }
 
   .ingredients {
@@ -74,12 +77,23 @@
   }
 
   .addBtn {
-    background-color: var(--accent-color);
+    background-color: var(--color-button);
+    text-transform: uppercase;
+    color: var(--text-light);
+    border: none;
     border-radius: 2rem;
-    display: flex;
     padding: 0.5rem 2rem;
     font-size: var(--font-size-small);
     margin-bottom: 2rem;
-    text-transform: uppercase;
-    border: none;
+    cursor: pointer;
+  }
+
+  .addBtn:hover {
+    background-color: var(--accent-color);
+  }
+
+  .addLink {
+    text-decoration: none;
+    color: var(--text-light);
+    cursor: pointer;
   }

@@ -47,7 +47,6 @@ export async function addToShoppingList(recipe: Recipe): Promise<AddRecipeRespon
       name: ingredient.name,
     }));
 
-    console.log(ingredientsArray)
 
     // Insert the recipe into the shopping_list table
     const { error } = await supabase.from("shopping_list").insert([
@@ -72,6 +71,9 @@ export async function addToShoppingList(recipe: Recipe): Promise<AddRecipeRespon
     return { success: false, error: 'Internal Server Error' };
   }
 }
+
+
+
 
 
 /* export async function deleterecipe(id) {

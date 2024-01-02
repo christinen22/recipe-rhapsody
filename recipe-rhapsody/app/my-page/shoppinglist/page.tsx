@@ -63,8 +63,34 @@ const ShoppingListPage = () => {
     document.body.removeChild(link);
   };
 
+  const handleDeleteClick = async (recipe: Recipe) => {
+    // Delete the recipe from the shopping_list table
+    try {
+      const { error } = await supabase
+        .from("shopping_list")
+        .delete()
+        .eq("recipe_id", recipe.id);
+
+      if (error) {
+        console.error("Error deleting recipe:", error);
+      } else {
+        // Remove the deleted recipe from the state
+        setShoppingList((prevList) =>
+          prevList ? prevList.filter((item) => item.id !== recipe.id) : []
+        );
+        console.log("Recipe deleted successfully!");
+      }
+      console.log("Recipe deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting recipe:", error);
+    }
+  };
+
   return (
     <div>
+      <Button className={styles.button} onClick={goBack}>
+        Go Back
+      </Button>
       <h1>Your Shopping List</h1>
       {shoppingList ? (
         <>
@@ -81,6 +107,12 @@ const ShoppingListPage = () => {
                 onClick={() => handleExportClick(item)}
               >
                 Export Shopping List
+              </Button>
+              <Button
+                className={styles.buttonDelete}
+                onClick={() => handleDeleteClick(item)}
+              >
+                Delete Shopping List
               </Button>
             </div>
           ))}

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import styles from "./Authform.module.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface AuthFormProps {
   handleSubmit: (

@@ -37,15 +37,16 @@ const Navigation: React.FC = () => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.logoContainer}>
-        <Image
-          src={Logo}
-          alt="Recipe Rhapsody logo"
-          width={70}
-          placeholder="blur"
-          quality={100}
-        />
+        <Link href="/">
+          <Image
+            src={Logo}
+            alt="Recipe Rhapsody logo"
+            width={70}
+            placeholder="blur"
+            quality={100}
+          />
+        </Link>
       </div>
-
       <div className={clsx(styles.menu, { [styles.menuOpen]: isOpen })}>
         <ul className={clsx(styles.navList, { [styles.mobileMenu]: isOpen })}>
           {links.map((link) => (

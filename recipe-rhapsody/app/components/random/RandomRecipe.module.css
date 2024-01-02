@@ -45,7 +45,10 @@
   }
   
   .button {
-    background-color: var(--accent-color);
+    background-color: var(--color-button);
+    border: none;
+    text-transform: uppercase;
+    color: var(--text-light);
     border-radius: 2rem;
     display: flex;
     align-items: center;
@@ -56,6 +59,5 @@
   }
   
   .button:hover {
-    background-color: #ffad00; 
+    background-color: var(--accent-color);
   }
-  

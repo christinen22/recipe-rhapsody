@@ -43,7 +43,7 @@ const Search = () => {
         <Form.Group controlId="searchQuery">
           <Form.Control
             onChange={(e) => setSearchInput(e.target.value)}
-            placeholder="Search recipe or ingredient"
+            placeholder="Search Recipe Rhapsody"
             required
             type="text"
             value={searchInput}

@@ -78,9 +78,11 @@ const SingleRecipePage = () => {
             </div>
           ))}
           <ShoppingListBtn recipe={recipe} />
-          <Link href="/my-page/shoppinglist" className={styles.goBackButton}>
-            View Shopping List
-          </Link>
+          <Button className={styles.addBtn}>
+            <Link className={styles.addLink} href="/my-page/shoppinglist">
+              View Shopping List
+            </Link>
+          </Button>
         </div>
         <span
           className={styles.recipes}

@@ -69,16 +69,17 @@ const Cuisine = () => {
 
   return (
     <div className={styles.cuisine}>
-      <h2>Recipes by Cuisine</h2>
+      <h2 className={styles.title}>Recipes by Cuisine</h2>
       <div>
         <ul className={styles.navList}>
           {cuisines.map((cuisine) => (
             <li key={cuisine}>
-              <Link href={`/cuisine/${encodeURIComponent(cuisine)}`} passHref>
-                <Button
-                  onClick={() => handleClick()}
-                  className={styles.navLink}
-                >
+              <Link
+                href={`/cuisine/${encodeURIComponent(cuisine)}`}
+                passHref
+                className={styles.navLink}
+              >
+                <Button onClick={() => handleClick()} className={styles.button}>
                   {cuisine}
                 </Button>
               </Link>

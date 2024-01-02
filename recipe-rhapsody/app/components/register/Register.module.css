@@ -1,5 +1,5 @@
 .container {
-    background-color: #68C858;
+    background-color: #bce8c7;
     background-size: cover;
     width: 100%;
     padding-bottom: 3rem;
@@ -19,7 +19,10 @@ padding: 4rem 3rem;
 }
 
 .button {
-    background-color: var(--accent-color);
+    background-color: var(--color-button);
+    text-transform: uppercase;
+    color: var(--text-light);
+    border: none;
     border-radius: 2rem;
     display: flex;
     align-items: center;
@@ -30,7 +33,7 @@ padding: 4rem 3rem;
 }
 
 .button:hover {
-    background-color: #ffad00; 
+    background-color: var(--accent-color);
   }
   
 

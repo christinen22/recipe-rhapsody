@@ -9,6 +9,7 @@ import { Recipe, User } from "../../types/recipe";
 import Link from "next/link";
 import Image from "next/image";
 import Login from "../components/users/Login";
+import Welcome from "../components/users/Welcome";
 
 const MyPage = () => {
   const [recipes, setRecipes] = useState<Recipe[] | null>(null);
@@ -42,7 +43,10 @@ const MyPage = () => {
     <div>
       {user ? (
         <>
+          <Welcome />
           <Logout />
+          <Link href="/my-page/shoppinglist">Go to your shopping list</Link>
+          <Link href="/my-page/profile">Your profile</Link>
           <h1>My Saved Recipes</h1>
           {recipes ? (
             <ul className={styles.cardGrid}>

@@ -2,6 +2,8 @@ import { addRecipe } from "../../../utils/actions";
 import { Recipe } from "../../../types/recipe";
 import { Button } from "react-bootstrap";
 import styles from "../styles.module.css";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface SaveRecipeButtonProps {
   recipe: Recipe;
@@ -19,19 +21,23 @@ const SaveRecipeButton: React.FC<SaveRecipeButtonProps> = ({ recipe }) => {
       const response: AddRecipeResponse = await addRecipe(recipe);
 
       if (response.error) {
-        console.error("Error adding recipe:", response.error);
+        toast.error("Error adding recipe");
       } else {
-        console.log("Recipe added successfully!");
+        toast.success("Recipe added successfully!");
       }
     } catch (error) {
       console.error("Error adding recipe:", error);
+      toast.error("Error adding recipe");
     }
   };
 
   return (
-    <Button className={styles.addBtn} onClick={handleAddRecipeClick}>
-      Add Recipe
-    </Button>
+    <>
+      <Button className={styles.addBtn} onClick={handleAddRecipeClick}>
+        Add Recipe
+      </Button>
+      <ToastContainer position="bottom-right" />
+    </>
   );
 };
 
