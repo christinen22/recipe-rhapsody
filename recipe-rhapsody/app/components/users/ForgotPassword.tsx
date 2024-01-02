@@ -19,7 +19,9 @@ const ForgotPassword: React.FC<PasswordResetFormProps> = ({ onSuccess }) => {
     const supabase = createClientComponentClient();
 
     try {
-      const { error } = await supabase.auth.resetPasswordForEmail(email);
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: "/my-page/profile",
+      });
 
       if (error) {
         setError("Failed to send password reset email");
