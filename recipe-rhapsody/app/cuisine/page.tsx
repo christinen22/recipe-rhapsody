@@ -1,12 +1,17 @@
 "use client";
-import Link from "next/link";
+
 import { useEffect, useState } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button } from "react-bootstrap";
-import styles from "./styles.module.css";
-import { getRecipes } from "../../lib/spoonacular";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+} from "@nextui-org/react";
 import { Recipes } from "../../types/recipe";
-import { useRouter, useSearchParams } from "next/navigation";
+import { getRecipes } from "../../lib/spoonacular";
+import styles from "./styles.module.css";
+import RecipeList from "../components/recipe/RecipeList";
 
 const cuisines = [
   "African",
@@ -38,56 +43,85 @@ const cuisines = [
   "Vietnamese",
 ];
 
-const Cuisine = () => {
-  const [selectedCuisine, setSelectedCuisine] = useState<string>("");
+function CuisineRecipes() {
+  const [selectedCuisine, setSelectedCuisine] = useState<string | null>("");
+  const [recipes, setRecipes] = useState<Recipes | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const searchParams = useSearchParams();
-  const queryClient = useQueryClient();
-  const router = useRouter();
-
-  const query = searchParams.get("query") ?? "";
-
-  const { data: cuisine } = useQuery({
-    queryKey: ["cuisine", { query }],
-    queryFn: () => getRecipes(query),
-  });
+  const fetchRecipes = async (cuisine: string) => {
+    try {
+      setLoading(true);
+      const data = await getRecipes(cuisine);
+      setRecipes(data);
+      setError(null);
+    } catch (error) {
+      console.error("Error fetching cuisine:", error);
+      setError("Error fetching recipes. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    queryClient.invalidateQueries({
-      queryKey: ["cuisine", { query }],
-    });
-  }, [selectedCuisine, queryClient]);
+    if (selectedCuisine) {
+      fetchRecipes(selectedCuisine);
+    }
+  }, [selectedCuisine]);
 
-  console.log(query);
-
-  const handleClick = () => {
-    const formattedCuisineQueryParam = encodeURIComponent(
-      cuisineQueryParam
-    ).replace(/%20/g, "+");
-    router.push(`/cuisine/${formattedCuisineQueryParam}`);
-  };
   return (
     <div className={styles.cuisine}>
       <h2 className={styles.title}>Recipes by Cuisine</h2>
-      <div>
-        <ul className={styles.navList}>
-          {cuisines.map((cuisine) => (
-            <li key={cuisine}>
-              <Link
-                href={`/cuisine/${encodeURIComponent(cuisine)}`}
-                passHref
-                className={styles.navLink}
+
+      <div className={styles.navList}>
+        {/* Show dropdown for mobile view */}
+        <Dropdown>
+          <DropdownTrigger>
+            <Button variant="outline-primary" className={styles.dropdownBtn}>
+              {selectedCuisine || "Select Cuisine"}
+            </Button>
+          </DropdownTrigger>
+          <DropdownMenu className={styles.dropdownMenu}>
+            {cuisines.map((cuisine) => (
+              <DropdownItem
+                key={cuisine}
+                onClick={() => {
+                  setSelectedCuisine(cuisine);
+                }}
+                className={styles.dropdownItem}
               >
-                <Button onClick={() => handleClick()} className={styles.button}>
-                  {cuisine}
-                </Button>
-              </Link>
-            </li>
-          ))}
-        </ul>
+                {cuisine}
+              </DropdownItem>
+            ))}
+          </DropdownMenu>
+        </Dropdown>
+
+        {/* Show buttons for desktop and tablet view */}
+        {cuisines.map((cuisine) => (
+          <Button
+            className={`${styles.button} ${
+              selectedCuisine === cuisine ? styles.activeButton : ""
+            }`}
+            key={cuisine}
+            variant="outline-primary"
+            onClick={() => setSelectedCuisine(cuisine)}
+            active={selectedCuisine === cuisine}
+          >
+            {cuisine}
+          </Button>
+        ))}
       </div>
+
+      {loading && <p>Loading recipes...</p>}
+      {error && <p>{error}</p>}
+
+      {recipes && recipes.results ? (
+        <RecipeList query={String(selectedCuisine)} />
+      ) : (
+        <p>No recipes available for the selected cuisine.</p>
+      )}
     </div>
   );
-};
+}
 
-export default Cuisine;
+export default CuisineRecipes;

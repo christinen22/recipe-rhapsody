@@ -1,5 +1,51 @@
+.dropdown {
+  display: block;
+  
+}
+
+.dropdownMenu {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  max-height: 350px; 
+  overflow: auto;
+  position: relative; 
+}
+
+.dropdownBtn {
+  background-color: var(--color-button);
+  border: none;
+  text-transform: uppercase;
+  color: var(--text-light);
+  border-radius: 2rem;
+  padding: 0.5rem 2rem;
+  margin: 0.5rem;
+  font-size: var(--font-size-small);
+}
+
+.dropdownItem {
+  background-color: var(--color-button);
+  border: none;
+  text-transform: uppercase;
+  color: var(--text-light);
+  border-radius: 2rem;
+  padding: 0.5rem 2rem;
+  margin: 0.5rem;
+  font-size: var(--font-size-small);
+  cursor: pointer;
+}
+
+.button {
+  display: none;
+}
+
 .cuisine {
-    color: black;
+  text-align: center; 
+}
+
+.cuisine {
+  color: black;
+  background-color: var(--background-color);
 }
 
 .title {
@@ -9,39 +55,46 @@
 }
 
 
-.navList {
-    max-width: 1200px;
+
+@media (min-width: 767px) {
+  .navList {
     list-style: none;
     flex-wrap: wrap;
     display: flex;
     justify-content: center;
   }
-
-  .navLink {
-    text-decoration: none;
-  }
   
   .button {
-    transition: color 0.3s ease-in-out;
     background-color: var(--color-button);
     border: none;
     text-transform: uppercase;
     color: var(--text-light);
     border-radius: 2rem;
-    display: flex;
-    align-items: center;
     padding: 0.5rem 2rem;
     margin: 0.5rem;
     font-size: var(--font-size-small);
-
     cursor: pointer;
   }
   
   .button:hover {
     color: var(--accent-color);
   }
-  
-  .activeNavLink {
+
+  .activeButton {
     color: var(--accent-color);
-    font-weight: bold;
+    font-weight: bold;  
   }
+
+  .dropdown {
+    display: none;
+  }
+
+  .button {
+    display: block;
+  }
+
+  .dropdownBtn {
+    display: none;
+  }
+}
+
