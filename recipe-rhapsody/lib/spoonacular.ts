@@ -7,7 +7,13 @@ const baseUrl = 'https://api.spoonacular.com';
 const PAGE_SIZE = 20;
 
 
-export const getRecipes = cache(async (query?: string, page = 1): Promise<Recipes> => {
+
+export const getRecipes = cache(async (
+    query?: string,
+    page = 1,
+    mealType?: string,
+    cuisine?: string
+): Promise<Recipes> => {
     const headers = getHeaders();
 
     const params: { [key: string]: string } = {};
@@ -15,10 +21,11 @@ export const getRecipes = cache(async (query?: string, page = 1): Promise<Recipe
     params.offset = ((page - 1) * PAGE_SIZE).toString();
     params.number = PAGE_SIZE.toString();
 
-    const queryParams = buildQueryParams(params);
+    // Include additional parameters using buildQueryParams
+    const queryParams = buildQueryParams(params, { mealType, cuisine });
 
     const res = await fetch(`${baseUrl}/recipes/complexSearch${queryParams}`, {
-        headers
+        headers,
     });
 
     if (!res.ok) {
@@ -27,6 +34,9 @@ export const getRecipes = cache(async (query?: string, page = 1): Promise<Recipe
 
     return res.json();
 });
+
+
+
 
 
 export const getRandomRecipes = async (): Promise<RandomRecipe> => {

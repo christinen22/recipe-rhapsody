@@ -8,12 +8,14 @@
 
 //Function that takes objects params as a argument and clean up url and returns a query-string
 
-export const buildQueryParams = (params: Record<string, any>) => {
-    const queryParams = Object.entries(params)
+export const buildQueryParams = (params: Record<string, any>, additionalParams: Record<string, any> = {}) => {
+    const allParams = { ...params, ...additionalParams };
+
+    const queryParams = Object.entries(allParams)
         .filter(([_, value]) => value !== undefined)
         .map(
             ([key, value]) =>
-                //encodeURIComponent handles special characters in the URL
+                // encodeURIComponent handles special characters in the URL
                 `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
         )
         .join("&");

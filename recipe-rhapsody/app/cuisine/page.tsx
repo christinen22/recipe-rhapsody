@@ -39,34 +39,33 @@ const cuisines = [
 ];
 
 const Cuisine = () => {
+  const [selectedCuisine, setSelectedCuisine] = useState<string>("");
+
   const searchParams = useSearchParams();
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const [selectedCuisine, setSelectedCuisine] = useState<string>("");
-  const [recipes, setRecipes] = useState<Recipes | null>(null);
+  const query = searchParams.get("query") ?? "";
+
+  const { data: cuisine } = useQuery({
+    queryKey: ["cuisine", { query }],
+    queryFn: () => getRecipes(query),
+  });
 
   useEffect(() => {
-    const fetchRecipes = async () => {
-      try {
-        const data = await getRecipes(selectedCuisine);
-        setRecipes(data);
-      } catch (error) {
-        console.error("Error fetching cuisine:", error);
-      }
-    };
+    queryClient.invalidateQueries({
+      queryKey: ["cuisine", { query }],
+    });
+  }, [selectedCuisine, queryClient]);
 
-    if (selectedCuisine) {
-      fetchRecipes();
-    }
-  }, [selectedCuisine]);
-
-  console.log(selectedCuisine);
+  console.log(query);
 
   const handleClick = () => {
-    router.push(`/cuisine?query=${encodeURIComponent(selectedCuisine)}`);
+    const formattedCuisineQueryParam = encodeURIComponent(
+      cuisineQueryParam
+    ).replace(/%20/g, "+");
+    router.push(`/cuisine/${formattedCuisineQueryParam}`);
   };
-
   return (
     <div className={styles.cuisine}>
       <h2 className={styles.title}>Recipes by Cuisine</h2>

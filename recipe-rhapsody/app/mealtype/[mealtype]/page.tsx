@@ -6,41 +6,41 @@ import { Recipes } from "../../../types/recipe";
 import { getRecipes } from "../../../lib/spoonacular";
 import RecipeList from "../../components/recipe/RecipeList";
 
-function SingleCuisine() {
+function SingleMealType() {
   const [recipes, setRecipes] = useState<Recipes | null>(null);
-  const [selectedCuisine, setSelectedCuisine] = useState<string>("");
-  const { cuisine } = useParams();
+  const [selectedMealType, setSelectedMealType] = useState<string>("");
+  const { mealtype } = useParams();
 
-  console.log(cuisine);
+  console.log(mealtype);
 
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        if (cuisine) {
-          const data = await getRecipes(String(cuisine));
+        if (mealtype) {
+          const data = await getRecipes(String(mealtype));
           setRecipes(data);
-          console.log("Query Cuisine:", data);
+          console.log("Query MealType:", data);
         }
       } catch (error) {
-        console.error("Error fetching cuisine:", error);
+        console.error("Error fetching mealtype:", error);
       }
     };
 
     fetchRecipes();
-  }, [cuisine]);
+  }, [mealtype]);
 
   return (
-    <div className={styles.cuisine}>
-      <h2>Recipes from cuisine "{cuisine}"</h2>
+    <div className={styles.mealtype}>
+      <h2>Recipes from meal type "{mealtype}"</h2>
       {recipes && recipes.results ? (
         <>
-          <RecipeList query={String(cuisine)} />
+          <RecipeList query={String(mealtype)} />
         </>
       ) : (
-        <p>No recipes available for {selectedCuisine} cuisine.</p>
+        <p>No recipes available for {selectedMealType} mealtype.</p>
       )}
     </div>
   );
 }
 
-export default SingleCuisine;
+export default SingleMealType;
