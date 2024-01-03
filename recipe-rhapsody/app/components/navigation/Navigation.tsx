@@ -41,7 +41,7 @@ const Navigation: React.FC = () => {
           <Image
             src={Logo}
             alt="Recipe Rhapsody logo"
-            width={70}
+            width={120}
             placeholder="blur"
             quality={100}
           />

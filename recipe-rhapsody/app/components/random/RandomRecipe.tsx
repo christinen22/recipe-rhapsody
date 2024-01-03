@@ -6,6 +6,7 @@ import { Recipe } from "../../../types/recipe";
 import Image from "next/image";
 import { Button } from "react-bootstrap";
 import styles from "./RandomRecipe.module.css";
+import Link from "next/link";
 
 const RandomRecipe = () => {
   const [recipe, setRecipe] = useState<Recipe | null>(null);
@@ -19,7 +20,7 @@ const RandomRecipe = () => {
         const randomRecipe = response.recipes[0];
 
         if (!randomRecipe || !randomRecipe.title) {
-          throw new Error("No valid recipe found");
+          throw new Error("No recipe found");
         }
 
         setRecipe(randomRecipe);
@@ -54,18 +55,25 @@ const RandomRecipe = () => {
     <>
       <div className={styles.container}>
         <h2 className={styles.title}>Random recipe of today</h2>
-        <h3 className={styles.heading}>{recipe.title}</h3>
-        <div
-          className={styles.text}
-          dangerouslySetInnerHTML={{ __html: recipe.summary }}
-        />
-        <Image
-          src={recipe.image}
-          alt={recipe.title}
-          width={300}
-          height={300}
-          className={styles.image}
-        />
+        <Link
+          href={`/recipes/${encodeURIComponent(recipe.id)}`}
+          className={styles.link}
+          passHref
+        >
+          <h3 className={styles.heading}>{recipe.title}</h3>
+          <div
+            className={styles.text}
+            dangerouslySetInnerHTML={{ __html: recipe.summary }}
+          />
+
+          <Image
+            src={recipe.image}
+            alt={recipe.title}
+            width={300}
+            height={300}
+            className={styles.image}
+          />
+        </Link>
         <Button className={styles.button} onClick={handleGenerateNewRecipe}>
           Generate New Recipe
         </Button>

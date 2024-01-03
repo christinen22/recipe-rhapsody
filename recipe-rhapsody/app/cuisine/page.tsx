@@ -115,11 +115,9 @@ function CuisineRecipes() {
       {loading && <p>Loading recipes...</p>}
       {error && <p>{error}</p>}
 
-      {recipes && recipes.results ? (
+      {selectedCuisine && recipes && recipes.results ? (
         <RecipeList query={String(selectedCuisine)} />
-      ) : (
-        <p>No recipes available for the selected cuisine.</p>
-      )}
+      ) : null}
     </div>
   );
 }

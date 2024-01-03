@@ -36,7 +36,6 @@ const SaveRecipeButton: React.FC<SaveRecipeButtonProps> = ({ recipe }) => {
       <Button className={styles.addBtn} onClick={handleAddRecipeClick}>
         Add Recipe
       </Button>
-      <ToastContainer position="bottom-right" />
     </>
   );
 };

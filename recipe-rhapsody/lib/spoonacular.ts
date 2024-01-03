@@ -8,32 +8,43 @@ const PAGE_SIZE = 20;
 
 
 
-export const getRecipes = cache(async (
-    query?: string,
-    page = 1,
-    mealType?: string,
-    cuisine?: string
-): Promise<Recipes> => {
-    const headers = getHeaders();
+export const getRecipes = cache(
+    async (
+        query?: string,
+        page = 1,
+        mealType?: string,
+        cuisine?: string
+    ): Promise<Recipes> => {
+        const headers = getHeaders();
 
-    const params: { [key: string]: string } = {};
-    if (query) params.query = query;
-    params.offset = ((page - 1) * PAGE_SIZE).toString();
-    params.number = PAGE_SIZE.toString();
+        const params: { [key: string]: string } = {};
+        if (query) params.query = query;
+        params.offset = ((page - 1) * PAGE_SIZE).toString();
+        params.number = PAGE_SIZE.toString();
 
-    // Include additional parameters using buildQueryParams
-    const queryParams = buildQueryParams(params, { mealType, cuisine });
+        // Include additional parameters using buildQueryParams
+        const queryParams = buildQueryParams(params, { mealType, cuisine });
 
-    const res = await fetch(`${baseUrl}/recipes/complexSearch${queryParams}`, {
-        headers,
-    });
+        const res = await fetch(
+            `${baseUrl}/recipes/complexSearch${queryParams}`,
+            {
+                headers,
+            }
+        );
 
-    if (!res.ok) {
-        throw new Error("Failed to fetch data");
+        if (!res.ok) {
+            throw new Error("Failed to fetch data");
+        }
+
+        const data = await res.json();
+
+        return {
+            ...data,
+            results: data.results.slice(0, PAGE_SIZE),
+        };
     }
+);
 
-    return res.json();
-});
 
 
 

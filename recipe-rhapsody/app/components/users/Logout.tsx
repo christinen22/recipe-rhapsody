@@ -21,7 +21,7 @@ const Logout = () => {
   };
   return (
     <div>
-      <Button className={styles.submitButton} onClick={handleLogout}>
+      <Button className={styles.logoutButton} onClick={handleLogout}>
         Logout
       </Button>
     </div>

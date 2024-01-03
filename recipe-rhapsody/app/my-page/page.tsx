@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Button } from "@nextui-org/react";
 import Logout from "../components/users/Logout";
 import getMyRecipes from "../components/users/MyRecipes";
 import styles from "./styles.module.css";
@@ -10,11 +11,13 @@ import Link from "next/link";
 import Image from "next/image";
 import Login from "../components/users/Login";
 import Welcome from "../components/users/Welcome";
+import { useRouter } from "next/navigation";
 
 const MyPage = () => {
   const [recipes, setRecipes] = useState<Recipe[] | null>(null);
   const supabase = createClientComponentClient();
   const [user, setUser] = useState<User | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,14 +42,51 @@ const MyPage = () => {
     fetchData();
   }, []);
 
+  const handleDeleteClick = async (recipe: Recipe) => {
+    // Delete the recipe from the shopping_list table
+    try {
+      const { error } = await supabase
+        .from("recipes")
+        .delete()
+        .eq("recipe_id", recipe.id);
+
+      if (error) {
+        console.error("Error deleting recipe:", error);
+      } else {
+        // Remove the deleted recipe from the state
+        setRecipes((prevList) =>
+          prevList ? prevList.filter((item) => item.id !== recipe.id) : []
+        );
+        console.log("Recipe deleted successfully!");
+      }
+      console.log("Recipe deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting recipe:", error);
+    }
+  };
+
+  const handleClickShopping = () => {
+    router.push("/my-page/shoppinglist");
+  };
+
+  const handleClickProfile = () => {
+    router.push("/my-page/profile");
+  };
+
   return (
     <div>
       {user ? (
         <>
           <Welcome />
           <Logout />
-          <Link href="/my-page/shoppinglist">Go to your shopping list</Link>
-          <Link href="/my-page/profile">Your profile</Link>
+          <div className={styles.buttons}>
+            <Button className={styles.button} onClick={handleClickShopping}>
+              My Shopping List
+            </Button>
+            <Button className={styles.button} onClick={handleClickProfile}>
+              My Profile
+            </Button>
+          </div>
           <h1>My Saved Recipes</h1>
           {recipes ? (
             <ul className={styles.cardGrid}>
@@ -62,6 +102,12 @@ const MyPage = () => {
                     />
                     <h3 className={styles.title}>{recipe.title}</h3>
                   </Link>
+                  <Button
+                    className={styles.buttonDelete}
+                    onClick={() => handleDeleteClick(recipe)}
+                  >
+                    Delete Recipe
+                  </Button>
                 </li>
               ))}
             </ul>

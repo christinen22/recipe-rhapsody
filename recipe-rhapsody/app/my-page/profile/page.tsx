@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import styles from "../styles.module.css";
 
 const ProfilePage = () => {
   const [newPassword, setNewPassword] = useState("");
@@ -21,7 +22,6 @@ const ProfilePage = () => {
         toast.error("Error updating password");
       } else {
         toast.success("Password updated successfully");
-        // Provide user feedback or navigate to another page
       }
     } catch (error) {
       console.error("Error updating password");
@@ -29,23 +29,31 @@ const ProfilePage = () => {
   };
 
   return (
-    <div>
+    <main>
       <h2>User Profile</h2>
-      <Form>
-        <Form.Group controlId="formNewPassword">
-          <Form.Label>New Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Enter new password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-          />
-        </Form.Group>
-        <Button variant="primary" onClick={handleChangePassword}>
-          Change Password
-        </Button>
-      </Form>
-    </div>
+      <div className={styles.container}>
+        <h2 className={styles.title}>Change Password</h2>
+        <Form>
+          <Form.Group controlId="formNewPassword" className={styles.group}>
+            <Form.Label className={styles.formHeading}>New Password</Form.Label>
+            <Form.Control
+              className={styles.input}
+              type="password"
+              placeholder="Enter new password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+            />
+          </Form.Group>
+          <Button
+            className={styles.submitButton}
+            variant="primary"
+            onClick={handleChangePassword}
+          >
+            Change Password
+          </Button>
+        </Form>
+      </div>
+    </main>
   );
 };
 

@@ -61,3 +61,7 @@
   .button:hover {
     background-color: var(--accent-color);
   }
+
+  .link {
+    text-decoration: none;
+  }

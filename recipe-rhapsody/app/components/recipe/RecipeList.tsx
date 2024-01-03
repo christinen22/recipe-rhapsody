@@ -6,7 +6,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { getRecipes } from "../../../lib/spoonacular";
 import { Recipe } from "../../../types/recipe";
-import SaveRecipeButton from "../../recipes/[id]/SaveRecipeBtn";
 
 type RecipeListProps = {
   query: string;
@@ -20,7 +19,13 @@ const RecipeList = ({ query }: RecipeListProps) => {
     try {
       const res = await getRecipes(searchQuery, page);
       const newRecipes = res?.results || [];
-      setRecipes((prevRecipes) => [...prevRecipes, ...newRecipes]);
+
+      // Filter out duplicates based on id
+      const uniqueNewRecipes = newRecipes.filter(
+        (newRecipe) => !recipes.some((recipe) => recipe.id === newRecipe.id)
+      );
+
+      setRecipes((prevRecipes) => [...prevRecipes, ...uniqueNewRecipes]);
     } catch (error) {
       console.error("Error fetching recipes:", error);
     }
