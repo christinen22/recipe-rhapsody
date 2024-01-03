@@ -45,7 +45,21 @@ export const getRecipes = cache(
     }
 );
 
+export const getPopularDesserts = async (): Promise<Recipes> => {
+    try {
+        const headers = getHeaders()
+        const res = await fetch(`${baseUrl}/recipes/complexSearch?query=desserts&sort=popularity`, { headers });
 
+        if (!res.ok) {
+            throw new Error("Failed to fetch data");
+        }
+
+        return res.json();
+    } catch (error) {
+        console.error("Error fetching random recipes:", error);
+        throw error;
+    }
+}
 
 
 

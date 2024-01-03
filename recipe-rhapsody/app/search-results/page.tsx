@@ -34,7 +34,7 @@ const SearchResults = () => {
 
   return (
     <div>
-      <h2>Search Results for "{search}"</h2>
+      <h2>Search Results for {search}</h2>
       {recipes && recipes.results ? (
         <>
           <RecipeList query={String(search)} />
