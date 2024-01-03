@@ -9,7 +9,11 @@ const Register = () => {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push("/login");
+    router.push("/my-page");
+  };
+
+  const handleClickSignup = () => {
+    router.push("/signup");
   };
 
   return (
@@ -18,7 +22,7 @@ const Register = () => {
         Save your favorite recipes and get cooking
       </span>
       <div className={styles.buttons}>
-        <Button className={styles.button} onClick={handleClick}>
+        <Button className={styles.button} onClick={handleClickSignup}>
           Register
         </Button>
         <Button className={styles.button} onClick={handleClick}>
