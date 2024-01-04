@@ -11,30 +11,12 @@ export default function Signup() {
   const router = useRouter();
   const [error, setError] = useState("");
 
-  const isExistingUser = async (email: string) => {
-    const supabase = createClientComponentClient();
-    const { data, error } = await supabase.auth.getUser(email);
-
-    return data !== null;
-  };
-
   const handleSubmit = async (
     e: React.FormEvent,
     email: string,
     password: string
   ): Promise<void> => {
     e.preventDefault();
-
-    const emailExists = await isExistingUser(email);
-
-    console.log(emailExists);
-
-    if (emailExists) {
-      toast.error(
-        "Email is already registered. Please log in or use a different email."
-      );
-      return;
-    }
 
     const supabase = createClientComponentClient();
 
