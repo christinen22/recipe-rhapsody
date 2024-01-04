@@ -62,7 +62,7 @@ function MealTypeRecipes() {
 
       <div className={styles.navList}>
         {/* Show dropdown for mobile view */}
-        <Dropdown>
+        <Dropdown className={styles.dropdown}>
           <DropdownTrigger>
             <Button variant="outline-primary" className={styles.dropdownBtn}>
               {selectedMealType || "Select MealType"}

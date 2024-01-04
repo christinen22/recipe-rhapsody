@@ -12,15 +12,22 @@ export const getRecipes = cache(
     async (
         query?: string,
         page = 1,
+        dietaryPreferences: string[] = [],
         mealType?: string,
         cuisine?: string
     ): Promise<Recipes> => {
+        console.log("Query Params:", query, page, dietaryPreferences, mealType, cuisine);
+
         const headers = getHeaders();
 
         const params: { [key: string]: string } = {};
         if (query) params.query = query;
         params.offset = ((page - 1) * PAGE_SIZE).toString();
         params.number = PAGE_SIZE.toString();
+
+        if (dietaryPreferences.length > 0) {
+            params.diet = dietaryPreferences.join(",");
+        }
 
         // Include additional parameters using buildQueryParams
         const queryParams = buildQueryParams(params, { mealType, cuisine });
@@ -31,6 +38,8 @@ export const getRecipes = cache(
                 headers,
             }
         );
+
+        console.log("API Response:", res);
 
         if (!res.ok) {
             throw new Error("Failed to fetch data");
@@ -44,6 +53,7 @@ export const getRecipes = cache(
         };
     }
 );
+
 
 export const getPopularDesserts = async (): Promise<Recipes> => {
     try {
@@ -60,8 +70,6 @@ export const getPopularDesserts = async (): Promise<Recipes> => {
         throw error;
     }
 }
-
-
 
 
 export const getRandomRecipes = async (): Promise<RandomRecipe> => {

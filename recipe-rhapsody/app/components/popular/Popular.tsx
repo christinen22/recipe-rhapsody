@@ -41,7 +41,7 @@ const Popular = () => {
                   alt={recipe.title}
                   width={200}
                   height={200}
-                  className={styles.recipeImage}
+                  className={styles.image}
                 />
                 <h3 className={styles.title}>{recipe.title}</h3>
               </Link>

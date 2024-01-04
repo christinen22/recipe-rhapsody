@@ -6,6 +6,8 @@
   align-items: center;
   padding: 10px;
   background-color: var(--background-color);
+
+  width: 100%;
 }
 
 .logoContainer {
@@ -27,6 +29,8 @@
   margin: 0;
   padding: 0;
   display: none;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 
   @media (min-width: 992px){
     display: flex;
@@ -39,6 +43,7 @@
   padding: 10px;
   color: var(--color);
   transition: color 0.3s ease-in-out;
+  font-size: var(--font-size-medium);
 }
 
 .navLink:hover {

@@ -2,7 +2,7 @@ import { addToShoppingList } from "../../../utils/actions";
 import { Recipe } from "../../../types/recipe";
 import { Button } from "react-bootstrap";
 import styles from "../styles.module.css";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 interface SaveIngredientsButtonProps {
@@ -14,8 +14,6 @@ interface AddIngredientsResponse {
   error?: Error | string;
   success?: Boolean;
 }
-
-// Import statements...
 
 const ShoppingListBtn: React.FC<SaveIngredientsButtonProps> = ({ recipe }) => {
   const handleAddIngredientsClick = async () => {

@@ -76,30 +76,9 @@ const Navigation: React.FC = () => {
               [styles.menuOpen]: isOpen,
             })}
             onClick={handleClose}
-          >
-            Close
-          </div>
+          ></div>
         </div>
       </div>
-      {/* 
-      {showUserMenu && (
-        <div className={styles.menuOpen}>
-          <ul className={clsx(styles.navList, [styles.mobileMenu])}>
-            {userLinks.map((link) => (
-              <li key={link.name}>
-                <Link
-                  href={link.href}
-                  className={clsx(styles.navLink, {
-                    [styles.activeNavLink]: pathname === link.href,
-                  })}
-                >
-                  {link.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )} */}
     </nav>
   );
 };

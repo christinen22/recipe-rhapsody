@@ -1,8 +1,13 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { User } from "../../../types/recipe";
 import { addRecipe } from "../../../utils/actions";
 import { Recipe } from "../../../types/recipe";
 import { Button } from "react-bootstrap";
 import styles from "../styles.module.css";
-import { toast, ToastContainer } from "react-toastify";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 interface SaveRecipeButtonProps {
@@ -15,13 +20,24 @@ interface AddRecipeResponse {
 }
 
 const SaveRecipeButton: React.FC<SaveRecipeButtonProps> = ({ recipe }) => {
+  const [user, setUser] = useState<User | null>(null);
+  const supabase = createClientComponentClient();
+
   const handleAddRecipeClick = async () => {
     try {
+      // Check if the user is logged in
+      const { data } = await supabase.auth.getSession();
+      if (!data?.session?.user) {
+        // User is not logged in
+        toast.error("Please log in to add recipes.");
+        return;
+      }
+
       // Trigger the addRecipe function
       const response: AddRecipeResponse = await addRecipe(recipe);
 
       if (response.error) {
-        toast.error("Error adding recipe");
+        toast.error(`Error adding recipe`);
       } else {
         toast.success("Recipe added successfully!");
       }
@@ -30,6 +46,8 @@ const SaveRecipeButton: React.FC<SaveRecipeButtonProps> = ({ recipe }) => {
       toast.error("Error adding recipe");
     }
   };
+
+  console.log(user);
 
   return (
     <>
