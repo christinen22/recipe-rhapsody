@@ -26,7 +26,7 @@ const SearchIngredients = () => {
       queryKey: ["search-by-ingredients", { ingredients }],
     });
     console.log("useEffect triggered with ingredients:", ingredientInput);
-  }, [ingredientInput, queryClient]);
+  }, [ingredients, queryClient]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,8 +43,8 @@ const SearchIngredients = () => {
   return (
     <div className={styles.container}>
       <span className={styles.text}>
-        Do you have a set of ingredients at home and don't know what to do with
-        it?
+        Do you have a set of ingredients at home and don&#39;t know what to do
+        with it?
         <br />
         Perform a search and see what suggestions you get!
       </span>
