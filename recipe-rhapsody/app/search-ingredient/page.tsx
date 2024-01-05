@@ -42,37 +42,29 @@ const SearchIngredients = () => {
     fetchRecipes(String(ingredients), filterPreferences);
   }, [ingredients, filterPreferences]);
 
-  const handleFilterChange = (selectedPreferences: string[]) => {
-    setFilterPreferences(selectedPreferences);
-  };
-
   console.log(recipes);
 
   return (
     <div>
       <h2>Search Results for {ingredients}</h2>
 
-      <>
-        <Filter onFilterChange={handleFilterChange} />
-
-        <ul className={styles.cardGrid}>
-          {recipes.map((recipe: IngredientSearch, id) => (
-            <li key={id} className={styles.card}>
-              <Link href={`/recipes/${recipe.id}`} className={styles.link}>
-                <Image
-                  src={recipe.image}
-                  alt={recipe.title}
-                  width={200}
-                  height={200}
-                  className={styles.image}
-                />
-                <h3 className={styles.title}>{recipe.title}</h3>
-              </Link>
-              <SaveRecipeButton recipe={recipe as Recipe} />
-            </li>
-          ))}
-        </ul>
-      </>
+      <ul className={styles.cardGrid}>
+        {recipes.map((recipe: IngredientSearch, id) => (
+          <li key={id} className={styles.card}>
+            <Link href={`/recipes/${recipe.id}`} className={styles.link}>
+              <Image
+                src={recipe.image}
+                alt={recipe.title}
+                width={200}
+                height={200}
+                className={styles.image}
+              />
+              <h3 className={styles.title}>{recipe.title}</h3>
+            </Link>
+            <SaveRecipeButton recipe={recipe as Recipe} />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

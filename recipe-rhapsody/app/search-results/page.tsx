@@ -2,17 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { Recipe, Recipes } from "../../types/recipe";
-import { getRecipes, getRecipesByIngredients } from "../../lib/spoonacular";
+import { Recipes } from "../../types/recipe";
+import { getRecipes } from "../../lib/spoonacular";
 import RecipeList from "../components/recipe/RecipeList";
-import Image from "next/image";
-import styles from "./styles.module.css";
-import Link from "next/link";
 
 const SearchResults = () => {
   const [recipes, setRecipes] = useState<Recipes | null>(null);
   const searchParams = useSearchParams();
-  const [searched, setSearched] = useState<string>("");
 
   // 'query' parameter from the search params
   const search = searchParams.get("query");

@@ -25,15 +25,10 @@ const RecipeList = ({ query }: RecipeListProps) => {
     dietaryPreferences: string[]
   ) => {
     try {
-      const data = await getRecipes(
-        searchQuery,
-        page,
-        String(dietaryPreferences)
-      );
+      const data = await getRecipes(searchQuery, page, dietaryPreferences);
       setRecipes(data.results);
     } catch (error) {
       console.error("Error fetching recipes:", error);
-    } finally {
     }
   };
 

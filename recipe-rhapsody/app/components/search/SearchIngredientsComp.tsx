@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Form, Button } from "react-bootstrap";
-import * as API from "../../../lib/spoonacular";
+import { getRecipesByIngredients } from "../../../lib/spoonacular";
 import styles from "./Search.module.css";
 import { FaSearch } from "react-icons/fa";
 
@@ -18,7 +18,7 @@ const SearchIngredients = () => {
 
   const { data: recipes, refetch } = useQuery({
     queryKey: ["search-by-ingredients", { ingredients: ingredients }],
-    queryFn: () => API.getRecipesByIngredients(ingredients),
+    queryFn: () => getRecipesByIngredients(ingredients),
   });
 
   useEffect(() => {

@@ -12,6 +12,7 @@ export const getRecipes = cache(
     async (
         query?: string,
         page = 1,
+        dietaryPreferences: string[] = [],
         mealType?: string,
         cuisine?: string
     ): Promise<Recipes> => {
@@ -21,6 +22,10 @@ export const getRecipes = cache(
         if (query) params.query = query;
         params.offset = ((page - 1) * PAGE_SIZE).toString();
         params.number = PAGE_SIZE.toString();
+
+        if (dietaryPreferences.length > 0) {
+            params.diet = dietaryPreferences.join(",");
+        }
 
         // additional parameters with helper buildQueryParams
         const queryParams = buildQueryParams(params, { mealType, cuisine });
@@ -83,7 +88,7 @@ export const getRandomRecipes = async (): Promise<RandomRecipe> => {
 
 
 
-export const getRecipesByIngredients = async (ingredients: string, dietaryPreferences?: any): Promise<IngredientSearch[]> => {
+export const getRecipesByIngredients = async (ingredients: string, dietaryPreferences: string[] = [],): Promise<IngredientSearch[]> => {
     try {
         const headers = getHeaders();
         const apiUrl = `${baseUrl}/recipes/findByIngredients?ingredients=${encodeURIComponent(ingredients)}`;

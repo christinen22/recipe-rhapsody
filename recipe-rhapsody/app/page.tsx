@@ -3,7 +3,7 @@ import Landing from "./components/landing/Landing";
 import Popular from "./components/popular/Popular";
 import RandomRecipe from "./components/random/RandomRecipe";
 import Register from "./components/register/Register";
-import SearchIngredients from "./components/search/SearchIngredients";
+import SearchIngredientsComp from "./components/search/SearchIngredients";
 import styles from "./page.module.css";
 
 function HomePage() {
@@ -11,7 +11,7 @@ function HomePage() {
     <main className={styles.main}>
       <Landing />
       <Hero />
-      <SearchIngredients />
+      <SearchIngredientsComp />
       <Popular />
       <Register />
       <RandomRecipe />
