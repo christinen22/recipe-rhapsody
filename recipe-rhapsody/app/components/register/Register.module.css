@@ -1,5 +1,5 @@
 .container {
-    background-color: #bce8c7;
+    background-color: #6F8053;
     background-size: cover;
     width: 100%;
     padding-bottom: 3rem;
@@ -14,14 +14,15 @@
 
 .text {
 font-size: var(--font-size-medium);
+color: var(--text-light);
 text-align: center;
 padding: 4rem 3rem;
 }
 
 .button {
-    background-color: var(--color-button);
+    background-color: var(--background-color);
     text-transform: uppercase;
-    color: var(--text-light);
+    color: var(--accent-color);
     border: none;
     border-radius: 2rem;
     display: flex;
@@ -33,7 +34,7 @@ padding: 4rem 3rem;
 }
 
 .button:hover {
-    background-color: var(--accent-color);
+    transform: scale(1.1);
   }
   
 

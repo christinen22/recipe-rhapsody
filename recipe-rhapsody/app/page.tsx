@@ -1,12 +1,17 @@
 import Hero from "./components/hero/Hero";
+import Landing from "./components/landing/Landing";
 import Popular from "./components/popular/Popular";
 import RandomRecipe from "./components/random/RandomRecipe";
 import Register from "./components/register/Register";
+import SearchIngredients from "./components/search/SearchIngredients";
+import styles from "./page.module.css";
 
 function HomePage() {
   return (
-    <main>
+    <main className={styles.main}>
+      <Landing />
       <Hero />
+      <SearchIngredients />
       <Popular />
       <Register />
       <RandomRecipe />

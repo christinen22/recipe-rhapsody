@@ -38,7 +38,7 @@ const Search = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div>
       <Form className={styles.searchForm} onSubmit={handleSubmit}>
         <Form.Group controlId="searchQuery">
           <Form.Control

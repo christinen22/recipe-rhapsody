@@ -1,5 +1,5 @@
 import { cache } from "react";
-import { RecipeAnalyzedInstruction, RecipeIngredients, Recipes, RecipeSummary, Recipe, RandomRecipe } from '../types/recipe'
+import { RecipeIngredients, Recipes, RecipeSummary, Recipe, RandomRecipe, IngredientSearch } from '../types/recipe'
 
 import { buildQueryParams, getHeaders } from "../utils/helpers";
 
@@ -12,12 +12,9 @@ export const getRecipes = cache(
     async (
         query?: string,
         page = 1,
-        dietaryPreferences: string[] = [],
         mealType?: string,
         cuisine?: string
     ): Promise<Recipes> => {
-        console.log("Query Params:", query, page, dietaryPreferences, mealType, cuisine);
-
         const headers = getHeaders();
 
         const params: { [key: string]: string } = {};
@@ -25,11 +22,7 @@ export const getRecipes = cache(
         params.offset = ((page - 1) * PAGE_SIZE).toString();
         params.number = PAGE_SIZE.toString();
 
-        if (dietaryPreferences.length > 0) {
-            params.diet = dietaryPreferences.join(",");
-        }
-
-        // Include additional parameters using buildQueryParams
+        // additional parameters with helper buildQueryParams
         const queryParams = buildQueryParams(params, { mealType, cuisine });
 
         const res = await fetch(
@@ -38,8 +31,6 @@ export const getRecipes = cache(
                 headers,
             }
         );
-
-        console.log("API Response:", res);
 
         if (!res.ok) {
             throw new Error("Failed to fetch data");
@@ -53,7 +44,6 @@ export const getRecipes = cache(
         };
     }
 );
-
 
 export const getPopularDesserts = async (): Promise<Recipes> => {
     try {
@@ -72,6 +62,8 @@ export const getPopularDesserts = async (): Promise<Recipes> => {
 }
 
 
+
+
 export const getRandomRecipes = async (): Promise<RandomRecipe> => {
     try {
         const headers = getHeaders();
@@ -87,6 +79,32 @@ export const getRandomRecipes = async (): Promise<RandomRecipe> => {
         throw error;
     }
 };
+
+
+
+
+export const getRecipesByIngredients = async (ingredients: string, dietaryPreferences?: any): Promise<IngredientSearch[]> => {
+    try {
+        const headers = getHeaders();
+        const apiUrl = `${baseUrl}/recipes/findByIngredients?ingredients=${encodeURIComponent(ingredients)}`;
+
+        console.log('API URL:', apiUrl);  // Add this line
+
+        const response = await fetch(apiUrl, { headers });
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch recipes by ingredients. Status: ${response.status}`);
+        }
+
+        return response.json();
+    } catch (error) {
+        console.error("Error fetching recipes by ingredients:", error);
+        throw error;
+    }
+};
+
+
+
 
 
 export const getRecipeSummary = cache(
@@ -109,7 +127,7 @@ export const getRecipeSummary = cache(
     }
 );
 
-
+/* 
 
 export const getRecipeIngredients = cache(
     async (recipeId: number): Promise<RecipeIngredients> => {
@@ -144,4 +162,4 @@ export const getRecipeInstructions = cache(
 
         return res.json();
     }
-);
+); */

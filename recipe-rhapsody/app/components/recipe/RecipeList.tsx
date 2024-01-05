@@ -8,6 +8,7 @@ import { getRecipes } from "../../../lib/spoonacular";
 import { Recipe } from "../../../types/recipe";
 import SaveRecipeButton from "../../recipes/[id]/SaveRecipeBtn";
 import Filter from "../filter/Filter";
+import SearchIngredients from "../search/SearchIngredients";
 
 type RecipeListProps = {
   query: string;
@@ -24,7 +25,11 @@ const RecipeList = ({ query }: RecipeListProps) => {
     dietaryPreferences: string[]
   ) => {
     try {
-      const data = await getRecipes(searchQuery, page, dietaryPreferences);
+      const data = await getRecipes(
+        searchQuery,
+        page,
+        String(dietaryPreferences)
+      );
       setRecipes(data.results);
     } catch (error) {
       console.error("Error fetching recipes:", error);

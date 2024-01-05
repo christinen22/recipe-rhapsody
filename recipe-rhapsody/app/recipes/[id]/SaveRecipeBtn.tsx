@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { User } from "../../../types/recipe";
+import { IngredientSearch, User } from "../../../types/recipe";
 import { addRecipe } from "../../../utils/actions";
 import { Recipe } from "../../../types/recipe";
 import { Button } from "react-bootstrap";

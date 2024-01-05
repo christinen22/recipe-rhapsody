@@ -1,3 +1,29 @@
+.container {
+    background-color: #6F8053;
+    background-size: cover;
+    width: 100%;
+    padding-bottom: 3rem;
+    padding-top: 3rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 2rem;
+    margin-top: 2rem;
+}
+
+.text {
+    font-size: var(--font-size-small);
+    color: var(--text-light);
+    text-align: center;
+    padding: 1.5rem;
+
+
+    @media (min-width: 992px) {
+        font-size: var(--font-size-xlarge);
+      }
+}
+
 .searchForm {
     display: flex;
     padding-bottom: 2rem;

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Recipe, Recipes } from "../../types/recipe";
-import { getRecipes } from "../../lib/spoonacular";
+import { getRecipes, getRecipesByIngredients } from "../../lib/spoonacular";
 import RecipeList from "../components/recipe/RecipeList";
 import Image from "next/image";
 import styles from "./styles.module.css";

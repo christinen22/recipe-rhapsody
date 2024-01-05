@@ -49,24 +49,11 @@ export type RecipeIngredients = {
     ingredients: Ingredient[];
 };
 
-export type RecipeAnalyzedInstruction = {
-    name: string;
-    steps: RecipeInstruction[];
-};
-
-export type RecipeInstruction = {
-    number: number;
-    step: string;
-    ingredients: [];
-    equipment: Equipment[];
-};
-
-type Equipment = {
-    id: number;
-    name: string;
-    localizedName: string;
-    image: string;
-};
+export type IngredientSearch = {
+    id: number,
+    title: string,
+    image: string,
+}
 
 
 export type Cuisine = {

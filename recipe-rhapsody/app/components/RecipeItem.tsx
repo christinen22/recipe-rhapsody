@@ -1,4 +1,4 @@
-import { Recipe } from "../../types/recipe";
+/* import { Recipe } from "../../types/recipe";
 
 type RecipeItemProps = {
   recipe: Recipe;
@@ -13,3 +13,4 @@ const RecipeItem: React.FC<RecipeItemProps> = ({ recipe }) => {
 };
 
 export default RecipeItem;
+ */
