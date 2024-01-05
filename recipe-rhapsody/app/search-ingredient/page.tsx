@@ -8,7 +8,7 @@ import styles from "./styles.module.css";
 import Link from "next/link";
 import SaveRecipeButton from "../recipes/[id]/SaveRecipeBtn";
 import Filter from "../components/filter/Filter";
-import { IngredientSearch } from "../../types/recipe";
+import { IngredientSearch, Recipe } from "../../types/recipe";
 
 const SearchIngredients = () => {
   const [recipes, setRecipes] = useState<IngredientSearch[]>([]);
@@ -68,7 +68,7 @@ const SearchIngredients = () => {
                 />
                 <h3 className={styles.title}>{recipe.title}</h3>
               </Link>
-              <SaveRecipeButton recipe={recipe} />
+              <SaveRecipeButton recipe={recipe as Recipe} />
             </li>
           ))}
         </ul>
