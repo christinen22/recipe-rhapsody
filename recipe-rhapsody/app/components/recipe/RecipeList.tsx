@@ -8,7 +8,6 @@ import { getRecipes } from "../../../lib/spoonacular";
 import { Recipe } from "../../../types/recipe";
 import SaveRecipeButton from "../../recipes/[id]/SaveRecipeBtn";
 import Filter from "../filter/Filter";
-import SearchIngredients from "../search/SearchIngredients";
 
 type RecipeListProps = {
   query: string;
@@ -17,15 +16,15 @@ type RecipeListProps = {
 const RecipeList = ({ query }: RecipeListProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [filterPreferences, setFilterPreferences] = useState<string[]>([]);
+  const [diet, setDiet] = useState<string | null>(null);
 
   const fetchRecipes = async (
     page: number,
     searchQuery: string,
-    dietaryPreferences: string[]
+    diet: string | null
   ) => {
     try {
-      const data = await getRecipes(searchQuery, page, dietaryPreferences);
+      const data = await getRecipes(searchQuery, page, String(diet));
       setRecipes(data.results);
     } catch (error) {
       console.error("Error fetching recipes:", error);
@@ -35,18 +34,19 @@ const RecipeList = ({ query }: RecipeListProps) => {
   useEffect(() => {
     setRecipes([]);
     setCurrentPage(1);
-  }, [query, filterPreferences]);
+  }, [query, diet]);
 
   useEffect(() => {
-    fetchRecipes(currentPage, query, filterPreferences);
-  }, [currentPage, query, filterPreferences]);
+    fetchRecipes(currentPage, query, diet);
+  }, [currentPage, query, diet]);
 
   const loadMore = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
 
   const handleFilterChange = (selectedPreferences: string[]) => {
-    setFilterPreferences(selectedPreferences);
+    console.log("Selected Preferences in RecipeList:", selectedPreferences);
+    setDiet(selectedPreferences.join(","));
   };
 
   return (

@@ -20,7 +20,6 @@ interface AddRecipeResponse {
 }
 
 const SaveRecipeButton: React.FC<SaveRecipeButtonProps> = ({ recipe }) => {
-  const [user, setUser] = useState<User | null>(null);
   const supabase = createClientComponentClient();
 
   const handleAddRecipeClick = async () => {
@@ -42,12 +41,9 @@ const SaveRecipeButton: React.FC<SaveRecipeButtonProps> = ({ recipe }) => {
         toast.success("Recipe added successfully!");
       }
     } catch (error) {
-      console.error("Error adding recipe:", error);
       toast.error("Error adding recipe");
     }
   };
-
-  console.log(user);
 
   return (
     <>

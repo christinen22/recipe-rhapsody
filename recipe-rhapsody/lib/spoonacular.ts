@@ -12,7 +12,7 @@ export const getRecipes = cache(
     async (
         query?: string,
         page = 1,
-        dietaryPreferences: string[] = [],
+        diet?: string,
         mealType?: string,
         cuisine?: string
     ): Promise<Recipes> => {
@@ -23,12 +23,8 @@ export const getRecipes = cache(
         params.offset = ((page - 1) * PAGE_SIZE).toString();
         params.number = PAGE_SIZE.toString();
 
-        if (dietaryPreferences.length > 0) {
-            params.diet = dietaryPreferences.join(",");
-        }
-
         // additional parameters with helper buildQueryParams
-        const queryParams = buildQueryParams(params, { mealType, cuisine });
+        const queryParams = buildQueryParams(params, { mealType, cuisine, diet });
 
         const res = await fetch(
             `${baseUrl}/recipes/complexSearch${queryParams}`,
@@ -88,12 +84,11 @@ export const getRandomRecipes = async (): Promise<RandomRecipe> => {
 
 
 
-export const getRecipesByIngredients = async (ingredients: string, dietaryPreferences: string[] = [],): Promise<IngredientSearch[]> => {
+export const getRecipesByIngredients = async (ingredients: string, diet?: string): Promise<IngredientSearch[]> => {
     try {
         const headers = getHeaders();
         const apiUrl = `${baseUrl}/recipes/findByIngredients?ingredients=${encodeURIComponent(ingredients)}`;
 
-        console.log('API URL:', apiUrl);  // Add this line
 
         const response = await fetch(apiUrl, { headers });
 

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { getRecipesByIngredients } from "../../lib/spoonacular";
 import Image from "next/image";
+import { Button } from "@nextui-org/react";
 import styles from "./styles.module.css";
 import Link from "next/link";
 import SaveRecipeButton from "../recipes/[id]/SaveRecipeBtn";
@@ -13,19 +14,21 @@ import { IngredientSearch, Recipe } from "../../types/recipe";
 const SearchIngredients = () => {
   const [recipes, setRecipes] = useState<IngredientSearch[]>([]);
   const searchParams = useSearchParams();
-  const [filterPreferences, setFilterPreferences] = useState<string[]>([]);
+  const [diet, setDiet] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   // 'ingredients' parameter from the search params
   const ingredients = searchParams.get("ingredients");
 
   const fetchRecipes = async (
+    page: number,
     ingredients: string,
-    dietaryPreferences: string[]
+    diet: string | null
   ) => {
     try {
       const data = await getRecipesByIngredients(
         String(ingredients),
-        dietaryPreferences
+        String(diet)
       );
       setRecipes(data);
       console.log("API Response:", data);
@@ -36,17 +39,26 @@ const SearchIngredients = () => {
 
   useEffect(() => {
     setRecipes([]);
-  }, [ingredients, filterPreferences]);
+    setCurrentPage(1);
+  }, [ingredients, diet]);
 
   useEffect(() => {
-    fetchRecipes(String(ingredients), filterPreferences);
-  }, [ingredients, filterPreferences]);
+    fetchRecipes(currentPage, String(ingredients), diet);
+  }, [currentPage, ingredients, diet]);
 
-  console.log(recipes);
+  const handleFilterChange = (selectedPreferences: string[]) => {
+    console.log("Selected Preferences in RecipeList:", selectedPreferences);
+    setDiet(selectedPreferences.join(","));
+  };
+
+  const loadMore = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
 
   return (
     <div>
       <h2>Search Results for {ingredients}</h2>
+      <Filter onFilterChange={handleFilterChange} />
 
       <ul className={styles.cardGrid}>
         {recipes.map((recipe: IngredientSearch, id) => (
@@ -65,6 +77,9 @@ const SearchIngredients = () => {
           </li>
         ))}
       </ul>
+      <Button className={styles.button} onClick={loadMore}>
+        Load More
+      </Button>
     </div>
   );
 };

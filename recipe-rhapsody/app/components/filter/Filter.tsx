@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { Button } from "@nextui-org/react";
 import styles from "./styles.module.css";
@@ -9,7 +11,7 @@ interface DietaryFilterProps {
 const Filter: React.FC<DietaryFilterProps> = ({ onFilterChange }) => {
   const [vegetarian, setVegetarian] = useState(false);
   const [glutenFree, setGlutenFree] = useState(false);
-  const [dairyFree, setDairyFree] = useState(false);
+  const [vegan, setvegan] = useState(false);
 
   const handleFilterChange = () => {
     const selectedPreferences: string[] = [];
@@ -19,12 +21,14 @@ const Filter: React.FC<DietaryFilterProps> = ({ onFilterChange }) => {
     }
 
     if (glutenFree) {
-      selectedPreferences.push("glutenFree");
+      selectedPreferences.push("gluten free");
     }
 
-    if (dairyFree) {
-      selectedPreferences.push("dairyFree");
+    if (vegan) {
+      selectedPreferences.push("vegan");
     }
+
+    console.log("Selected Preferences:", selectedPreferences);
 
     onFilterChange(selectedPreferences);
   };
@@ -48,11 +52,11 @@ const Filter: React.FC<DietaryFilterProps> = ({ onFilterChange }) => {
         />
       </label>
       <label className={styles.label}>
-        Dairy-Free
+        Vegan
         <input
           type="checkbox"
-          checked={dairyFree}
-          onChange={() => setDairyFree(!dairyFree)}
+          checked={vegan}
+          onChange={() => setvegan(!vegan)}
         />
       </label>
       <Button className={styles.button} onClick={handleFilterChange}>
