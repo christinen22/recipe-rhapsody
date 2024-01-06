@@ -45,7 +45,7 @@ const SearchIngredients = () => {
       <Form.Group controlId="ingredientSearch">
         <Form.Control
           onChange={(e) => setIngredientInput(e.target.value)}
-          placeholder="chicken, garlic, pasta"
+          placeholder="Type ingredients eg. chicken, garlic"
           required
           type="text"
           value={ingredientInput}

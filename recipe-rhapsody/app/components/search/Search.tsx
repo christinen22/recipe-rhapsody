@@ -7,7 +7,6 @@ import { Form, Button } from "react-bootstrap";
 import * as API from "../../../lib/spoonacular";
 import styles from "./Search.module.css";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import SearchIngredients from "./SearchIngredients";
 
 const Search = () => {
   const queryClient = useQueryClient();
@@ -39,7 +38,7 @@ const Search = () => {
   };
 
   return (
-    <div className={styles.navsearch}>
+    <div>
       <Form className={styles.searchForm} onSubmit={handleSubmit}>
         <Form.Group controlId="searchQuery">
           <Form.Control
@@ -61,7 +60,6 @@ const Search = () => {
           <FaMagnifyingGlass />
         </Button>
       </Form>
-      <SearchIngredients />
     </div>
   );
 };
