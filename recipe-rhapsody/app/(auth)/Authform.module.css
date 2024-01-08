@@ -28,11 +28,15 @@
   
 
 .submitButton {
-    background-color: var(--color-button);
-    border-radius: 0.5rem;
-    cursor: pointer;
-    display: block;
-    margin: auto;
+  background-color: var(--color-button);
+  border: none;
+  text-transform: uppercase;
+  color: var(--text-light);
+  border-radius: 2rem;
+  padding: 0.5rem 2rem;
+  margin: 0.5rem;
+  font-size: var(--font-size-small);
+  cursor: pointer;
 }
 
 .submitButton:hover {

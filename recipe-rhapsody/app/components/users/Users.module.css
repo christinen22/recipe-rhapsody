@@ -30,15 +30,15 @@
 }
 
 .submitButton {
-    background-color: var(--accent-color);
-    margin-top: 0.5rem;
-    border-radius: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+    background-color: var(--color-button);
     border: none;
-    padding: 0.3rem;
+    text-transform: uppercase;
+    color: var(--text-light);
+    border-radius: 2rem;
+    padding: 0.5rem 2rem;
+    margin: 0.5rem;
+    font-size: var(--font-size-small);
+    cursor: pointer;
 }
 
 .logoutButton {
