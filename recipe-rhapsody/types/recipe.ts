@@ -12,6 +12,9 @@ export type Recipe = {
 }
 export type Recipes = {
     results: Recipe[];
+    offset: number,
+    number: number,
+    totalResults: number
 };
 
 export type ExtendedIngredients = {

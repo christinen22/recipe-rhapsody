@@ -17,6 +17,7 @@ const RecipeList = ({ query }: RecipeListProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [diet, setDiet] = useState<string | null>(null);
+  const [hasMorePages, setHasMorePages] = useState(true);
 
   const fetchRecipes = async (
     page: number,
@@ -25,7 +26,8 @@ const RecipeList = ({ query }: RecipeListProps) => {
   ) => {
     try {
       const data = await getRecipes(searchQuery, page, String(diet));
-      setRecipes(data.results);
+      setRecipes((prevRecipes) => [...prevRecipes, ...data.results]);
+      setHasMorePages(data.offset + data.number < data.totalResults);
     } catch (error) {
       console.error("Error fetching recipes:", error);
     }
@@ -34,6 +36,7 @@ const RecipeList = ({ query }: RecipeListProps) => {
   useEffect(() => {
     setRecipes([]);
     setCurrentPage(1);
+    setHasMorePages(true);
   }, [query, diet]);
 
   useEffect(() => {
@@ -41,11 +44,12 @@ const RecipeList = ({ query }: RecipeListProps) => {
   }, [currentPage, query, diet]);
 
   const loadMore = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
+    if (hasMorePages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
   };
 
   const handleFilterChange = (selectedPreferences: string[]) => {
-    console.log("Selected Preferences in RecipeList:", selectedPreferences);
     setDiet(selectedPreferences.join(","));
   };
 
@@ -70,8 +74,12 @@ const RecipeList = ({ query }: RecipeListProps) => {
           </li>
         ))}
       </ul>
-      <button className={styles.button} onClick={loadMore}>
-        Load More
+      <button
+        className={styles.button}
+        onClick={loadMore}
+        disabled={!hasMorePages}
+      >
+        {hasMorePages ? "Load More" : "No More Recipes"}
       </button>
     </div>
   );
