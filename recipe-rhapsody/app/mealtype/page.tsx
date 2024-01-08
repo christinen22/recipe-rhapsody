@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import {
   Dropdown,
@@ -12,8 +11,11 @@ import { Recipes } from "../../types/recipe";
 import { getRecipes } from "../../lib/spoonacular";
 import styles from "./styles.module.css";
 import RecipeList from "../components/recipe/RecipeList";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 
-const MealTypes = [
+const mealtypes = [
   "Main Course",
   "Side Dish",
   "Dessert",
@@ -31,30 +33,23 @@ const MealTypes = [
 ];
 
 function MealTypeRecipes() {
-  const [selectedMealType, setSelectedMealType] = useState<string | null>("");
-  const [recipes, setRecipes] = useState<Recipes | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const queryClient = useQueryClient();
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-  const fetchRecipes = async (MealType: string) => {
-    try {
-      setLoading(true);
-      const data = await getRecipes(MealType);
-      setRecipes(data);
-      setError(null);
-    } catch (error) {
-      console.error("Error fetching MealType:", error);
-      setError("Error fetching recipes. Please try again.");
-    } finally {
-      setLoading(false);
-    }
+  const {
+    data: recipes,
+    isLoading,
+    isError,
+  } = useQuery<Recipes>({
+    queryKey: ["mealtype", searchParams.get("query")],
+    queryFn: () => getRecipes(searchParams.get("query") ?? ""),
+  });
+
+  const handleClick = (mealtype: string) => {
+    router.push(`/mealtype/${encodeURIComponent(mealtype)}`);
+    queryClient.invalidateQueries({ queryKey: ["mealtype", mealtype] });
   };
-
-  useEffect(() => {
-    if (selectedMealType) {
-      fetchRecipes(selectedMealType);
-    }
-  }, [selectedMealType]);
 
   return (
     <div className={styles.mealtype}>
@@ -65,45 +60,56 @@ function MealTypeRecipes() {
         <Dropdown className={styles.dropdown}>
           <DropdownTrigger>
             <Button variant="outline-primary" className={styles.dropdownBtn}>
-              {selectedMealType || "Select MealType"}
+              {searchParams.get("query") || "Select Cuisine"}
             </Button>
           </DropdownTrigger>
           <DropdownMenu className={styles.dropdownMenu}>
-            {MealTypes.map((MealType) => (
-              <DropdownItem
-                key={MealType}
-                onClick={() => {
-                  setSelectedMealType(MealType);
-                }}
-                className={styles.dropdownItem}
+            {mealtypes.map((mealtype) => (
+              <Link
+                href={`/mealtype/${encodeURIComponent(mealtype)}`}
+                passHref
+                key={mealtype}
+                className={styles.link}
               >
-                {MealType}
-              </DropdownItem>
+                <DropdownItem
+                  onClick={() => handleClick(mealtype)}
+                  className={styles.dropdownItem}
+                >
+                  {mealtype}
+                </DropdownItem>
+              </Link>
             ))}
           </DropdownMenu>
         </Dropdown>
 
         {/* Show buttons for desktop and tablet view */}
-        {MealTypes.map((MealType) => (
-          <Button
-            className={`${styles.button} ${
-              selectedMealType === MealType ? styles.activeButton : ""
-            }`}
-            key={MealType}
-            variant="outline-primary"
-            onClick={() => setSelectedMealType(MealType)}
-            active={selectedMealType === MealType}
+        {mealtypes.map((mealtype) => (
+          <Link
+            href={`/mealtype/${encodeURIComponent(mealtype)}`}
+            passHref
+            key={mealtype}
+            className={styles.link}
           >
-            {MealType}
-          </Button>
+            <Button
+              className={`${styles.button} ${
+                searchParams.get("query") === mealtype
+                  ? styles.activeButton
+                  : ""
+              }`}
+              onClick={() => handleClick(mealtype)}
+              /*   active={searchParams.get("query") === cuisine} */
+            >
+              {mealtype}
+            </Button>
+          </Link>
         ))}
       </div>
 
-      {loading && <p>Loading recipes...</p>}
-      {error && <p>{error}</p>}
+      {isLoading && <p>Loading recipes...</p>}
+      {isError && <p>Error loading recipes. Please try again.</p>}
 
-      {selectedMealType && recipes && recipes.results ? (
-        <RecipeList query={String(selectedMealType)} />
+      {recipes && recipes.results ? (
+        <RecipeList query={searchParams.get("query") || ""} />
       ) : null}
     </div>
   );

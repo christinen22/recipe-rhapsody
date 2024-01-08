@@ -36,8 +36,27 @@
   cursor: pointer;
 }
 
+.goBackButton {
+  background-color: #FE6464;
+  text-transform: uppercase;
+  color: var(--text-light);
+  border: none;
+  border-radius: 2rem;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 2rem;
+  font-size: var(--font-size-small);
+  margin-bottom: 2rem;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
 .button {
   display: none;
+}
+
+.link {
+  text-decoration: none;
 }
 
 .cuisine {

@@ -1,17 +1,31 @@
 import styles from "./Search.module.css";
 import SearchIngredients from "./SearchIngredients";
+import Ingredients from "../../../public/images/ingredients.jpg";
+import Image from "next/image";
 
 const SearchIngredientsComp = () => {
   return (
     <div className={styles.container}>
-      <span className={styles.text}>
-        Do you have a set of ingredients at home and don&rsquo;t know what to do
-        with it?
+      <div className={styles.text}>
+        <span>
+          Do you have a set of ingredients at home and don't know what to do
+          with it?
+        </span>
         <br />
         <br />
-        Perform a search and see what suggestions you get!
-      </span>
-      <SearchIngredients />
+        <span>Perform a search and see what suggestions you get!</span>
+
+        <SearchIngredients />
+      </div>
+      <div className={styles.imageWrapper}>
+        <Image
+          className={styles.image}
+          src={Ingredients}
+          alt="Image of ingredients"
+          placeholder="blur"
+          quality={100}
+        />
+      </div>
     </div>
   );
 };

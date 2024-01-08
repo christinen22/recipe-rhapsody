@@ -10,12 +10,6 @@ const Landing = () => {
         🍽️ Explore, Save, Create: Elevate your cooking experience with Recipe
         Rhapsody, the ultimate destination for food enthusiasts like you!
       </span>
-      <span className={styles.text}>
-        🔍 Search Delight: Dive into a world of endless culinary possibilities.
-        Search and discover a bunch of recipes that cater to every taste bud and
-        occasion. From savory meals to sweet delights, Recipe Rhapsody has your
-        cravings covered.{" "}
-      </span>
     </div>
   );
 };
