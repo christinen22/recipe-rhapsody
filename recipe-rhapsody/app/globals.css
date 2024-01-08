@@ -4,11 +4,6 @@
 
 
 .body {
-  --breakpoint-tiny: 320px;
-  --breakpoint-small: 576px;
-  --breakpoint-medium: 992px;
-  --breakpoint-large: 1280px;
-  --breakpoint-xlarge: 1680px;
 
   --background-color: #F3F0DD;
   --accent-color: #57a16b;
