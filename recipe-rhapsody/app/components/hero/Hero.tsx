@@ -8,8 +8,8 @@ const Hero: React.FC = async () => {
         Search for you next adventure in the kitchen
       </h2>
       <span className={styles.text}>
-        Do you know "kind of" what you want to create in the kitchen? Search
-        through our library of yummy recipes!
+        Do you know &quot;kind of&quot; what you want to create in the kitchen?
+        Search through our library of yummy recipes!
       </span>
       <Search />
     </div>

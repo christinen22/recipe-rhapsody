@@ -8,7 +8,7 @@ const SearchIngredientsComp = () => {
     <div className={styles.container}>
       <div className={styles.text}>
         <span>
-          Do you have a set of ingredients at home and don't know what to do
+          Do you have a set of ingredients at home and do not know what to do
           with it?
         </span>
         <br />
