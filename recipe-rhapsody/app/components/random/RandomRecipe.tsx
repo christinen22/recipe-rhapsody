@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { getRandomRecipes } from "../../../lib/spoonacular";
 import { Recipe } from "../../../types/recipe";
-import Image from "next/image";
+import { Image } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import styles from "./RandomRecipe.module.css";
 import Link from "next/link";

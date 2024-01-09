@@ -4,7 +4,7 @@ import { getRecipeSummary } from "../../../lib/spoonacular";
 import { Recipe } from "../../../types/recipe";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import Image from "next/image";
+import { Image } from "react-bootstrap";
 import styles from "../styles.module.css";
 import { Button } from "react-bootstrap";
 import SaveRecipeButton from "./SaveRecipeBtn";
@@ -57,12 +57,9 @@ const SingleRecipePage = () => {
         <Image
           src={recipe.image}
           alt={recipe.title}
-          width={300}
+          width={200}
           height={200}
-          style={{
-            objectFit: "contain",
-            margin: "2rem",
-          }}
+          className={styles.image}
         />
         <span className={styles.recipes}>
           Ready in {recipe.readyInMinutes} minutes.

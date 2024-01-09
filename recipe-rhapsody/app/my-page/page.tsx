@@ -8,7 +8,7 @@ import styles from "./styles.module.css";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Recipe, User } from "../../types/recipe";
 import Link from "next/link";
-import Image from "next/image";
+import { Image } from "react-bootstrap";
 import Login from "../components/users/Login";
 import Welcome from "../components/users/Welcome";
 import { useRouter } from "next/navigation";
