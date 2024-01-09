@@ -44,6 +44,7 @@ export default function Login() {
       <h2 className={styles.title}>Login</h2>
 
       <AuthForm handleSubmit={handleSubmit} />
+      {error && <div className={styles.error}>{error}</div>}
 
       {showPasswordReset ? (
         <ForgotPassword onSuccess={handlePasswordResetSuccess} />
@@ -57,8 +58,6 @@ export default function Login() {
           </a>
         </p>
       )}
-
-      {error && <div className="error">{error}</div>}
     </main>
   );
 }

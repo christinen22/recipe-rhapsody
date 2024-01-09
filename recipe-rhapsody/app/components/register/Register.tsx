@@ -20,6 +20,15 @@ const Register = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.imageWrapper}>
+        <Image
+          className={styles.image}
+          src={RegisterImg}
+          alt="Image of recipe on screen"
+          placeholder="blur"
+          quality={100}
+        />
+      </div>
       <div className={styles.inner}>
         <span className={styles.text}>
           Create your own library of your favourite recipes. As a user on Recipe
@@ -37,15 +46,6 @@ const Register = () => {
             Login
           </Button>
         </div>
-      </div>
-      <div className={styles.imageWrapper}>
-        <Image
-          className={styles.image}
-          src={RegisterImg}
-          alt="Image of recipe on screen"
-          placeholder="blur"
-          quality={100}
-        />
       </div>
     </div>
   );

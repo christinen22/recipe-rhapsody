@@ -4,6 +4,8 @@ import { useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Button, Form } from "react-bootstrap";
 import styles from "./Users.module.css";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 interface PasswordResetFormProps {
   onSuccess: () => void;
@@ -12,6 +14,7 @@ interface PasswordResetFormProps {
 const ForgotPassword: React.FC<PasswordResetFormProps> = ({ onSuccess }) => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+  const router = useRouter();
 
   const handlePasswordReset = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,9 +27,10 @@ const ForgotPassword: React.FC<PasswordResetFormProps> = ({ onSuccess }) => {
       });
 
       if (error) {
-        setError("Failed to send password reset email");
+        toast.error("Failed to send password reset email");
       } else {
         setError("");
+        toast.success("Check your email for instructions!");
         onSuccess();
       }
     } catch (error) {

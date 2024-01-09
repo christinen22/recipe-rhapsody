@@ -31,7 +31,7 @@
 
         width: 100%;
         height: auto;
-        max-width: 600px;
+
         border-radius: 2rem;
   }
   
@@ -61,6 +61,7 @@
     cursor: pointer;
     margin-left: 4rem;
 }
+
 .button:hover {
     background-color: var(--accent-color);
   }
