@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import styles from "../styles.module.css";
 import { Recipes } from "../../../types/recipe";
 import { getRecipes } from "../../../lib/spoonacular";
@@ -10,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 
 function SingleMealtype() {
   const { mealtype } = useParams();
+  const router = useRouter();
 
   const decodedMealtype = decodeURIComponent(String(mealtype));
 
@@ -23,11 +24,11 @@ function SingleMealtype() {
   });
 
   const goBack = () => {
-    window.history.back();
+    router.back();
   };
 
   return (
-    <div className={styles.cuisine}>
+    <div className={styles.mealtype}>
       <Button className={styles.goBackButton} onClick={goBack}>
         Go Back
       </Button>

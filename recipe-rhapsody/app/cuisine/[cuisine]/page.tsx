@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import styles from "../styles.module.css";
 import { Recipes } from "../../../types/recipe";
 import { getRecipes } from "../../../lib/spoonacular";
@@ -10,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 
 function SingleCuisine() {
   const { cuisine } = useParams();
+  const router = useRouter();
 
   const decodedCuisine = decodeURIComponent(String(cuisine));
 
@@ -23,7 +24,7 @@ function SingleCuisine() {
   });
 
   const goBack = () => {
-    window.history.back();
+    router.back();
   };
 
   return (

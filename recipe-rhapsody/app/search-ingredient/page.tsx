@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { getRecipesByIngredients } from "../../lib/spoonacular";
-import Image from "next/image";
+import { Image } from "react-bootstrap";
 import styles from "./styles.module.css";
 import Link from "next/link";
 import SaveRecipeButton from "../recipes/[id]/SaveRecipeBtn";
