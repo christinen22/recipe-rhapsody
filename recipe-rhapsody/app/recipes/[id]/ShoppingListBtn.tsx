@@ -24,7 +24,7 @@ const ShoppingListBtn: React.FC<SaveIngredientsButtonProps> = ({ recipe }) => {
       if (response.success) {
         toast.success("Ingredients added successfully!");
       } else {
-        toast.error("Error adding ingredients:");
+        toast.error("Please log in to add to shopping list.");
       }
     } catch (error) {
       toast.error("Error adding ingredients:");

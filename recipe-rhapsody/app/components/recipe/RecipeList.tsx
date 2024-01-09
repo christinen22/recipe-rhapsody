@@ -79,7 +79,7 @@ const RecipeList = ({ query }: RecipeListProps) => {
         onClick={loadMore}
         disabled={!hasMorePages}
       >
-        {hasMorePages ? "Load More" : "No More Recipes"}
+        {hasMorePages ? "Load More" : "That's it"}
       </button>
     </div>
   );

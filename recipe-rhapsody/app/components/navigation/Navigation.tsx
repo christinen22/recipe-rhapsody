@@ -57,6 +57,7 @@ const Navigation: React.FC = () => {
                 className={clsx(styles.navLink, {
                   [styles.activeNavLink]: pathname === link.href,
                 })}
+                onClick={handleClose}
               >
                 {link.name}
               </Link>

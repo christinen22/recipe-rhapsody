@@ -17,12 +17,6 @@ const Footer: React.FC = () => {
         />
       </div>
 
-      <div className={styles.links}>
-        <Link href="/terms-of-service">Terms of Service</Link>
-        <Link href="/cookie-policy">Cookie Policy</Link>
-        <Link href="/privacy-policy">Privacy Policy</Link>
-      </div>
-
       <div className={styles.copyright}>
         <p>&copy; Recipe Rhapsody. All rights reserved.</p>
       </div>

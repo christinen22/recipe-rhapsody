@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Spinner } from "react-bootstrap";
 import * as API from "../../../lib/spoonacular";
 import styles from "./Search.module.css";
 import { FaSearch } from "react-icons/fa";
@@ -16,7 +16,7 @@ const SearchIngredients = () => {
 
   const ingredients = searchParams.get("ingredients") ?? "";
 
-  const { data: recipes, refetch } = useQuery({
+  const { data: recipes, isLoading } = useQuery({
     queryKey: ["search-by-ingredients", { ingredients: ingredients }],
     queryFn: () => API.getRecipesByIngredients(ingredients),
   });
@@ -59,7 +59,13 @@ const SearchIngredients = () => {
         disabled={!ingredientInput.trim().length}
         className={styles.button}
       >
-        <FaSearch />
+        {isLoading ? (
+          <Spinner animation="border" role="status" variant="light">
+            <span className="sr-only">Loading...</span>
+          </Spinner>
+        ) : (
+          <FaSearch />
+        )}
       </Button>
     </Form>
   );
