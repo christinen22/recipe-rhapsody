@@ -10,8 +10,8 @@ function HomePage() {
   return (
     <main className={styles.main}>
       <Landing />
-      <Hero />
       <SearchIngredientsComp />
+      <Hero />
       <Popular />
       <Register />
       <RandomRecipe />
