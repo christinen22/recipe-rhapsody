@@ -78,19 +78,13 @@ function CuisineRecipes() {
           </DropdownTrigger>
           <DropdownMenu className={styles.dropdownMenu}>
             {cuisines.map((cuisine) => (
-              <Link
-                href={`/cuisine/${encodeURIComponent(cuisine)}`}
-                passHref
+              <DropdownItem
                 key={cuisine}
-                className={styles.link}
+                onClick={() => handleClick(cuisine)}
+                className={styles.dropdownItem}
               >
-                <DropdownItem
-                  onClick={() => handleClick(cuisine)}
-                  className={styles.dropdownItem}
-                >
-                  {cuisine}
-                </DropdownItem>
-              </Link>
+                {cuisine}
+              </DropdownItem>
             ))}
           </DropdownMenu>
         </Dropdown>

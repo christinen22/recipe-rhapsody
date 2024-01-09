@@ -32,6 +32,8 @@ const mealtypes = [
   "Drink",
 ];
 
+// ... (other imports)
+
 function MealTypeRecipes() {
   const queryClient = useQueryClient();
   const router = useRouter();
@@ -48,7 +50,7 @@ function MealTypeRecipes() {
 
   const handleClick = (mealtype: string) => {
     router.push(`/mealtype/${encodeURIComponent(mealtype)}`);
-    queryClient.invalidateQueries({ queryKey: ["mealtype", mealtype] });
+    //queryClient.invalidateQueries({ queryKey: ["mealtype", mealtype] });
   };
 
   return (
@@ -60,24 +62,18 @@ function MealTypeRecipes() {
         <Dropdown className={styles.dropdown}>
           <DropdownTrigger>
             <Button variant="outline-primary" className={styles.dropdownBtn}>
-              {searchParams.get("query") || "Select Cuisine"}
+              {searchParams.get("query") || "Select Mealtype"}
             </Button>
           </DropdownTrigger>
           <DropdownMenu className={styles.dropdownMenu}>
             {mealtypes.map((mealtype) => (
-              <Link
-                href={`/mealtype/${encodeURIComponent(mealtype)}`}
-                passHref
+              <DropdownItem
                 key={mealtype}
-                className={styles.link}
+                onClick={() => handleClick(mealtype)}
+                className={styles.dropdownItem}
               >
-                <DropdownItem
-                  onClick={() => handleClick(mealtype)}
-                  className={styles.dropdownItem}
-                >
-                  {mealtype}
-                </DropdownItem>
-              </Link>
+                {mealtype}
+              </DropdownItem>
             ))}
           </DropdownMenu>
         </Dropdown>
@@ -97,7 +93,6 @@ function MealTypeRecipes() {
                   : ""
               }`}
               onClick={() => handleClick(mealtype)}
-              /*   active={searchParams.get("query") === cuisine} */
             >
               {mealtype}
             </Button>
