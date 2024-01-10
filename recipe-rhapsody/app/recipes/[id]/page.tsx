@@ -9,12 +9,12 @@ import styles from "../styles.module.css";
 import { Button } from "react-bootstrap";
 import SaveRecipeButton from "./SaveRecipeBtn";
 import ShoppingListBtn from "./ShoppingListBtn";
-const [savedRecipeIds, setSavedRecipeIds] = useState<number[]>([]);
 
 const SingleRecipePage = () => {
   const { id } = useParams();
   const router = useRouter();
   const [recipe, setRecipe] = useState<Recipe | null>(null);
+  const [savedRecipeIds, setSavedRecipeIds] = useState<number[]>([]);
 
   useEffect(() => {
     const fetchRecipe = async () => {
