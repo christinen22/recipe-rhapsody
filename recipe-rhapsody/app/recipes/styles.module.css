@@ -92,8 +92,8 @@ background-color: white;
     border: none;
     border-radius: 2rem;
     padding: 0.5rem 2rem;
-    font-size: var(--font-size-small);
-    margin-bottom: 2rem;
+    font-size: var(--font-size-medium);
+   
     cursor: pointer;
   }
 

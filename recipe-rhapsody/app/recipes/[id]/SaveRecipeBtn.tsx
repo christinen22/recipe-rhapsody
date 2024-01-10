@@ -49,7 +49,7 @@ const SaveRecipeButton: React.FC<SaveRecipeButtonProps> = ({
 
   return (
     <button className={styles.heartBtn} onClick={handleAddRecipeClick}>
-      {isSaved ? <FaHeart color="red" /> : <FaHeart color="black" />}
+      {isSaved ? <FaHeart color="red" /> : <FaRegHeart color="black" />}
     </button>
   );
 };
