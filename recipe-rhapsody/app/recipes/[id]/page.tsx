@@ -8,17 +8,13 @@ import { Image } from "react-bootstrap";
 import styles from "../styles.module.css";
 import { Button } from "react-bootstrap";
 import SaveRecipeButton from "./SaveRecipeBtn";
-import Link from "next/link";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { addToShoppingList } from "../../../utils/actions";
 import ShoppingListBtn from "./ShoppingListBtn";
+const [savedRecipeIds, setSavedRecipeIds] = useState<number[]>([]);
 
 const SingleRecipePage = () => {
   const { id } = useParams();
   const router = useRouter();
   const [recipe, setRecipe] = useState<Recipe | null>(null);
-
-  const supabase = createClientComponentClient();
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -44,13 +40,22 @@ const SingleRecipePage = () => {
     router.back();
   };
 
+  const handleRecipeSave = (recipeId: number) => {
+    // update the savedRecipeIds state when a recipe is saved
+    setSavedRecipeIds((prevIds) => [...prevIds, recipeId]);
+  };
+
   return (
     <>
       <div className={styles.btnContainer}>
         <Button className={styles.goBackButton} onClick={goBack}>
           Go Back
         </Button>
-        <SaveRecipeButton recipe={recipe} />
+        <SaveRecipeButton
+          recipe={recipe}
+          savedRecipeIds={savedRecipeIds}
+          onRecipeSave={handleRecipeSave}
+        />
       </div>
       <div className={styles.container}>
         <h3 className={styles.heading}>{recipe.title}</h3>
