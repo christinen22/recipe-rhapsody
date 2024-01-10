@@ -51,11 +51,11 @@ const SingleRecipePage = () => {
         <Button className={styles.goBackButton} onClick={goBack}>
           Go Back
         </Button>
-        <SaveRecipeButton
+        {/*         <SaveRecipeButton
           recipe={recipe}
           savedRecipeIds={savedRecipeIds}
           onRecipeSave={handleRecipeSave}
-        />
+        /> */}
       </div>
       <div className={styles.container}>
         <h3 className={styles.heading}>{recipe.title}</h3>
