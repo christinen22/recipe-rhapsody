@@ -27,6 +27,15 @@
     text-transform: uppercase;
 
   }
+
+  .image {
+    width: 100%;
+   height: auto; 
+   border-radius: 2rem;
+   margin: 2rem;
+    object-fit: cover;
+  }
+
   
   .text {
     font-size: var(--font-size-small);
@@ -76,7 +85,24 @@
 
   }
 
-  .addBtn {
+  .heartBtn {
+background-color: white;
+    text-transform: uppercase;
+    color: var(--text-light);
+    border: none;
+    border-radius: 2rem;
+    padding: 0.5rem 2rem;
+    font-size: var(--font-size-small);
+    margin-bottom: 2rem;
+    cursor: pointer;
+  }
+
+
+  .saved {
+    color: red; 
+  }
+
+ .addBtn {
     background-color: var(--color-button);
     text-transform: uppercase;
     color: var(--text-light);
@@ -96,4 +122,4 @@
     text-decoration: none;
     color: var(--text-light);
     cursor: pointer;
-  }
+  } 

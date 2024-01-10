@@ -1,56 +1,56 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { IngredientSearch, User } from "../../../types/recipe";
 import { addRecipe } from "../../../utils/actions";
 import { Recipe } from "../../../types/recipe";
-import { Button } from "react-bootstrap";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import styles from "../styles.module.css";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 interface SaveRecipeButtonProps {
   recipe: Recipe;
+  savedRecipeIds: number[];
+  onRecipeSave: (recipeId: number) => void;
 }
 
-interface AddRecipeResponse {
-  data?: any;
-  error?: Error | string;
-}
+const SaveRecipeButton: React.FC<SaveRecipeButtonProps> = ({
+  recipe,
+  savedRecipeIds = [],
+  onRecipeSave,
+}) => {
+  const [isSaved, setIsSaved] = useState(false);
 
-const SaveRecipeButton: React.FC<SaveRecipeButtonProps> = ({ recipe }) => {
-  const supabase = createClientComponentClient();
+  useEffect(() => {
+    const recipeIdString = Number(recipe.id);
+    setIsSaved(savedRecipeIds.includes(recipeIdString));
+  }, [savedRecipeIds, recipe.id]);
 
   const handleAddRecipeClick = async () => {
     try {
-      // Check if the user is logged in
-      const { data } = await supabase.auth.getSession();
-      if (!data?.session?.user) {
-        // User is not logged in
-        toast.error("Please log in to add recipes.");
+      // Check if the recipe is already saved before trying to add it
+      if (isSaved) {
+        toast.info("Recipe is already in your library.");
         return;
       }
 
-      // Trigger the addRecipe function
-      const response: AddRecipeResponse = await addRecipe(recipe);
+      const response = await addRecipe(recipe);
 
-      if (response.error) {
-        toast.error(`Error adding recipe`);
-      } else {
+      if (response.success) {
+        setIsSaved(true);
+        onRecipeSave(recipe.id);
         toast.success("Recipe added successfully!");
+      } else {
+        toast.error("You have to be logged in to add a recipe");
       }
     } catch (error) {
-      toast.error("Error adding recipe");
+      console.error("Error adding recipe:", error);
     }
   };
 
   return (
-    <>
-      <Button className={styles.addBtn} onClick={handleAddRecipeClick}>
-        Add Recipe
-      </Button>
-    </>
+    <button className={styles.heartBtn} onClick={handleAddRecipeClick}>
+      {isSaved ? <FaHeart color="red" /> : <FaHeart color="black" />}
+    </button>
   );
 };
 

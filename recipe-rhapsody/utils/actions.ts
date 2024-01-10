@@ -33,6 +33,42 @@ export async function addRecipe(recipe: Recipe): Promise<AddRecipeResponse> {
   }
 }
 
+
+
+export type GetSavedRecipeIdsResponse = {
+  success: boolean;
+  data?: number[];
+  error?: string;
+};
+
+export async function getSavedRecipeIds(): Promise<GetSavedRecipeIdsResponse> {
+  const supabase = createServerActionClient({ cookies });
+
+  // get current user session
+  const { data: { session } } = await supabase.auth.getSession();
+
+  try {
+    // fetch saved recipe IDs for the current user
+    const { data, error } = await supabase
+      .from('recipes')
+      .select('recipe_id')
+      .eq('user_email', session?.user.email);
+
+    if (error) {
+      throw new Error('Failed to fetch saved recipe IDs.');
+    }
+
+    // Extract recipe IDs from the data
+    const recipeIds = data?.map((item) => item.recipe_id) || [];
+
+    return { success: true, data: recipeIds };
+  } catch (error) {
+    return { success: false, error: 'Internal Server Error' };
+  }
+}
+
+
+
 // Function to add a recipe to the shopping list
 export async function addToShoppingList(recipe: Recipe): Promise<AddRecipeResponse> {
 

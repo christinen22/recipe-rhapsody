@@ -1,19 +1,3 @@
-/* import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
-import { NextResponse } from 'next/server'
-
-export async function DELETE(_, { params }) {
-  const id = params.id
-
-  const supabase = createRouteHandlerClient({ cookies })
-
-  const { error } = await supabase.from('tickets')
-    .delete()
-    .eq('id', id)
-
-  return NextResponse.json({ error })
-} */
-
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
@@ -26,6 +10,20 @@ export async function POST(request: Request) {
 
   // get current user session
   const { data: { session } } = await supabase.auth.getSession();
+
+  // check if the recipe is already saved
+  const existingRecipe = await supabase
+    .from('recipes')
+    .select('*')
+    .eq('user_email', session?.user.email)
+    .eq('recipe_id', saved.recipe_id)
+    .single();
+
+  if (existingRecipe.data) {
+
+    console.log('Recipe is already saved:', existingRecipe.data);
+    return NextResponse.json({ error: 'Recipe is already saved.' });
+  }
 
   // insert the data
   const { data, error } = await supabase.from('recipes')
