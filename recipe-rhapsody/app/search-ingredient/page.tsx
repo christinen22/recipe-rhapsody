@@ -12,6 +12,7 @@ import { IngredientSearch, Recipe } from "../../types/recipe";
 const SearchIngredients = () => {
   const [recipes, setRecipes] = useState<IngredientSearch[]>([]);
   const searchParams = useSearchParams();
+  const [savedRecipeIds, setSavedRecipeIds] = useState<number[]>([]);
 
   // 'ingredients' parameter from the search params
   const ingredients = searchParams.get("ingredients");
@@ -34,6 +35,11 @@ const SearchIngredients = () => {
     fetchRecipes(String(ingredients));
   }, [ingredients]);
 
+  const handleRecipeSave = (recipeId: number) => {
+    // update the savedRecipeIds state when a recipe is saved
+    setSavedRecipeIds((prevIds) => [...prevIds, recipeId]);
+  };
+
   return (
     <div>
       <h2>Search Results for {ingredients}</h2>
@@ -51,7 +57,11 @@ const SearchIngredients = () => {
               />
               <h3 className={styles.title}>{recipe.title}</h3>
             </Link>
-            <SaveRecipeButton recipe={recipe as Recipe} />
+            <SaveRecipeButton
+              recipe={recipe as Recipe}
+              savedRecipeIds={savedRecipeIds}
+              onRecipeSave={handleRecipeSave}
+            />
           </li>
         ))}
       </ul>
