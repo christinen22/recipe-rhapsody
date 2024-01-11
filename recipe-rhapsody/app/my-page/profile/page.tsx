@@ -29,7 +29,7 @@ const ProfilePage = () => {
   };
 
   return (
-    <main>
+    <div className={styles.wrapper}>
       <h2>User Profile</h2>
       <div className={styles.container}>
         <h2 className={styles.title}>Change Password</h2>
@@ -53,7 +53,7 @@ const ProfilePage = () => {
           </Button>
         </Form>
       </div>
-    </main>
+    </div>
   );
 };
 

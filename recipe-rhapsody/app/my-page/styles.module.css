@@ -82,6 +82,14 @@
     margin-bottom: 0;
   }
 
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
   .form {
     padding: 1rem 1.75rem;
     background-color: var(--accent-color);
@@ -111,10 +119,16 @@
   
 .submitButton {
   background-color: var(--color-button);
-  border-radius: 0.5rem;
+  border: none;
+  text-transform: uppercase;
+  color: var(--text-light);
+  border-radius: 2rem;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 2rem;
+  font-size: var(--font-size-small);
+  margin-bottom: 2rem;
   cursor: pointer;
-  display: block;
-  margin: auto;
 }
 
 .submitButton:hover {

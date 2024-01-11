@@ -30,7 +30,9 @@ const ForgotPassword: React.FC<PasswordResetFormProps> = ({ onSuccess }) => {
         toast.error("Failed to send password reset email");
       } else {
         setError("");
-        toast.success("Check your email for instructions!");
+        toast.success(
+          "You have been sent an email with a link that will give you access to your account. Change your password by going to Your Profile"
+        );
         onSuccess();
       }
     } catch (error) {
@@ -50,7 +52,7 @@ const ForgotPassword: React.FC<PasswordResetFormProps> = ({ onSuccess }) => {
         />
       </Form.Label>
       <Button className={styles.submitButton} type="submit">
-        Reset Password
+        Send access link
       </Button>
       {error && <p>{error}</p>}
     </Form>
