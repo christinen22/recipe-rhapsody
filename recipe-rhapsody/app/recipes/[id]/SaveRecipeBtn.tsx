@@ -27,8 +27,8 @@ const SaveRecipeButton: React.FC<SaveRecipeButtonProps> = ({
 
   const handleAddRecipeClick = async () => {
     try {
-      // Check if the recipe is already saved before trying to add it
-      if (isSaved) {
+      // Check if the recipe ID is already in the savedRecipeIds array
+      if (savedRecipeIds.includes(recipe.id)) {
         toast.info("Recipe is already in your library.");
         return;
       }
@@ -36,8 +36,9 @@ const SaveRecipeButton: React.FC<SaveRecipeButtonProps> = ({
       const response = await addRecipe(recipe);
 
       if (response.success) {
-        setIsSaved(true);
+        // Update the savedRecipeIds state when a recipe is saved
         onRecipeSave(recipe.id);
+        setIsSaved(true);
         toast.success("Recipe added successfully!");
       } else {
         toast.error("You have to be logged in to add a recipe");
