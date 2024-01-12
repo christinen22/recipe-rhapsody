@@ -12,11 +12,13 @@ import { Image } from "react-bootstrap";
 import Login from "../components/users/Login";
 import Welcome from "../components/users/Welcome";
 import { useRouter } from "next/navigation";
+import Loading from "../components/loading/Loading";
 
 const MyPage = () => {
   const [recipes, setRecipes] = useState<Recipe[] | null>(null);
   const supabase = createClientComponentClient();
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -35,7 +37,11 @@ const MyPage = () => {
           });
         } catch (error) {
           console.error("Error fetching user recipes:", error);
+        } finally {
+          setLoading(false);
         }
+      } else {
+        setLoading(false);
       }
     };
 
@@ -75,7 +81,9 @@ const MyPage = () => {
 
   return (
     <div>
-      {user ? (
+      {loading ? (
+        <Loading />
+      ) : user ? (
         <>
           <Welcome />
           <Logout />

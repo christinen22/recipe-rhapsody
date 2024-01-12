@@ -8,11 +8,13 @@ import styles from "./styles.module.css";
 import Link from "next/link";
 import SaveRecipeButton from "../recipes/[id]/SaveRecipeBtn";
 import { IngredientSearch, Recipe } from "../../types/recipe";
+import Loading from "../components/loading/Loading";
 
 const SearchIngredients = () => {
   const [recipes, setRecipes] = useState<IngredientSearch[]>([]);
   const searchParams = useSearchParams();
   const [savedRecipeIds, setSavedRecipeIds] = useState<number[]>([]);
+  const [loading, setLoading] = useState(true);
 
   // 'ingredients' parameter from the search params
   const ingredients = searchParams.get("ingredients");
@@ -21,9 +23,11 @@ const SearchIngredients = () => {
     try {
       const data = await getRecipesByIngredients(String(ingredients));
       setRecipes(data);
+      setLoading(false);
       console.log("API Response:", data);
     } catch (error) {
       console.error("Error fetching recipes:", error);
+      setLoading(false);
     }
   };
 
@@ -42,29 +46,35 @@ const SearchIngredients = () => {
 
   return (
     <div>
-      <h2>Search Results for {ingredients}</h2>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <h2>Search Results for {ingredients}</h2>
 
-      <ul className={styles.cardGrid}>
-        {recipes.map((recipe: IngredientSearch, id) => (
-          <li key={id} className={styles.card}>
-            <Link href={`/recipes/${recipe.id}`} className={styles.link}>
-              <Image
-                src={recipe.image}
-                alt={recipe.title}
-                width={200}
-                height={200}
-                className={styles.image}
-              />
-              <h3 className={styles.title}>{recipe.title}</h3>
-            </Link>
-            <SaveRecipeButton
-              recipe={recipe as Recipe}
-              savedRecipeIds={savedRecipeIds}
-              onRecipeSave={handleRecipeSave}
-            />
-          </li>
-        ))}
-      </ul>
+          <ul className={styles.cardGrid}>
+            {recipes.map((recipe: IngredientSearch, id) => (
+              <li key={id} className={styles.card}>
+                <Link href={`/recipes/${recipe.id}`} className={styles.link}>
+                  <Image
+                    src={recipe.image}
+                    alt={recipe.title}
+                    width={200}
+                    height={200}
+                    className={styles.image}
+                  />
+                  <h3 className={styles.title}>{recipe.title}</h3>
+                </Link>
+                <SaveRecipeButton
+                  recipe={recipe as Recipe}
+                  savedRecipeIds={savedRecipeIds}
+                  onRecipeSave={handleRecipeSave}
+                />
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
     </div>
   );
 };

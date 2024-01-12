@@ -7,6 +7,7 @@ import { getRecipes } from "../../../lib/spoonacular";
 import RecipeList from "../../components/recipe/RecipeList";
 import { Button } from "@nextui-org/react";
 import { useQuery } from "@tanstack/react-query";
+import Loading from "../../components/loading/Loading";
 
 function SingleCuisine() {
   const { cuisine } = useParams();
@@ -33,7 +34,7 @@ function SingleCuisine() {
         Go Back
       </Button>
       <h2>Recipes from cuisine {decodedCuisine}</h2>
-      {isLoading && <p>Loading recipes...</p>}
+      {isLoading && <Loading />}
       {isError && <p>Error loading recipes. Please try again.</p>}
 
       {recipes && recipes.results ? (

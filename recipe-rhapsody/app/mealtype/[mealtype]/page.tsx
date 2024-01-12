@@ -7,6 +7,7 @@ import { getRecipes } from "../../../lib/spoonacular";
 import RecipeList from "../../components/recipe/RecipeList";
 import { Button } from "@nextui-org/react";
 import { useQuery } from "@tanstack/react-query";
+import Loading from "../../components/loading/Loading";
 
 function SingleMealtype() {
   const { mealtype } = useParams();
@@ -33,7 +34,7 @@ function SingleMealtype() {
         Go Back
       </Button>
       <h2>Recipes from mealtype {decodedMealtype}</h2>
-      {isLoading && <p>Loading recipes...</p>}
+      {isLoading && <Loading />}
       {isError && <p>Error loading recipes. Please try again.</p>}
 
       {recipes && recipes.results ? (
