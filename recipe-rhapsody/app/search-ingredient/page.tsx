@@ -47,7 +47,7 @@ const SearchIngredients = () => {
   return (
     <div>
       {loading ? (
-        <Loading />
+        <p className={`${styles.loading} ${styles.pulsating}`}>Loading...</p>
       ) : (
         <>
           <h2>Search Results for {ingredients}</h2>

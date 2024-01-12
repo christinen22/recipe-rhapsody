@@ -82,7 +82,7 @@ const MyPage = () => {
   return (
     <div>
       {loading ? (
-        <Loading />
+        <p className={`${styles.loading} ${styles.pulsating}`}>Loading...</p>
       ) : user ? (
         <>
           <Welcome />

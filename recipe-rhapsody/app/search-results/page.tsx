@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { Recipes } from "../../types/recipe";
 import { getRecipes } from "../../lib/spoonacular";
 import RecipeList from "../components/recipe/RecipeList";
-import Loading from "../components/loading/Loading";
+import styles from "./styles.module.css";
 
 const SearchResults = () => {
   const [recipes, setRecipes] = useState<Recipes | null>(null);
@@ -35,7 +35,7 @@ const SearchResults = () => {
   return (
     <div>
       {loading ? (
-        <Loading />
+        <p className={`${styles.loading} ${styles.pulsating}`}>Loading...</p>
       ) : (
         <>
           <h2>Search Results for {search}</h2>

@@ -34,7 +34,9 @@ function SingleCuisine() {
         Go Back
       </Button>
       <h2>Recipes from cuisine {decodedCuisine}</h2>
-      {isLoading && <Loading />}
+      {isLoading && (
+        <p className={`${styles.loading} ${styles.pulsating}`}>Loading...</p>
+      )}
       {isError && <p>Error loading recipes. Please try again.</p>}
 
       {recipes && recipes.results ? (
