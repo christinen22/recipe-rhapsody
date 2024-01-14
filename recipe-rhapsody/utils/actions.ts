@@ -3,6 +3,7 @@
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from 'next/headers';
 import { Recipe } from "../types/recipe";
+import { getRecipeSummary } from "../lib/spoonacular";
 
 interface AddRecipeResponse {
   success: boolean;
@@ -36,6 +37,38 @@ export async function addRecipe(recipe: Recipe): Promise<AddRecipeResponse> {
     return { success: false };
   }
 }
+
+export async function getMyRecipes(userEmail: string) {
+  const supabase = createServerActionClient({ cookies });
+
+  const { data, error } = await supabase
+    .from("recipes")
+    .select()
+    .eq("user_email", userEmail); // Filter recipes by user email
+
+  if (error) {
+    console.error(error.message);
+    return [];
+  }
+
+  const recipes = await Promise.all(
+    data.map(async (savedRecipe: any) => {
+      try {
+        // get details from Spoonacular based on recipe id in Supabase
+        const details = await getRecipeSummary(savedRecipe.recipe_id);
+
+        // merge saved recipe data with Spoonacular details
+        return { ...savedRecipe, ...details };
+      } catch (error) {
+        console.error("Error fetching recipe details:", error);
+        return null;
+      }
+    })
+  );
+
+  // Filter out any recipes with errors
+  return recipes.filter((recipe: Recipe) => recipe !== null);
+};
 
 
 
@@ -113,21 +146,37 @@ export async function addToShoppingList(recipe: Recipe): Promise<AddRecipeRespon
   }
 }
 
+export async function getMyShoppingList(userEmail: string) {
+  const supabase = createServerActionClient({ cookies });
 
+  const { data, error } = await supabase
+    .from("shopping_list")
+    .select()
+    .eq("user_email", userEmail); // Filter recipes by user email
 
-
-
-/* export async function deleterecipe(id) {
-  const supabase = createServerActionClient({ cookies })
-
-  const { error } = await supabase.from('recipes')
-    .delete()
-    .eq('id', id)
-  
   if (error) {
-    throw new Error('Could not delete the recipe.')
+    console.error(error.message);
+    return [];
   }
 
-  revalidatePath('/recipes')
-  redirect('/recipes')
-}  */
+  const ingredients = await Promise.all(
+    data.map(async (savedRecipe: any) => {
+      try {
+        // get details from Spoonacular based on recipe id in Supabase
+        const details = await getRecipeSummary(savedRecipe.recipe_id);
+
+        // merge saved recipe data with Spoonacular details
+        return { ...savedRecipe, ...details };
+      } catch (error) {
+        console.error("Error fetching recipe details:", error);
+        return null;
+      }
+    })
+  );
+
+  // Filter out any recipes with errors
+  return ingredients.filter((recipe: Recipe) => recipe !== null);
+
+
+}
+

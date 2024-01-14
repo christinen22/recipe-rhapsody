@@ -4,38 +4,42 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import styles from "../styles.module.css";
-import getMyShoppingList from "../../components/users/MyShoppingList";
+import { getMyShoppingList } from "../../../utils/actions";
 import { Recipe } from "../../../types/recipe";
 import { User } from "../../../types/recipe";
 import { Button } from "react-bootstrap";
-
-interface Ingredient {
-  name: string;
-}
 
 const ShoppingListPage = () => {
   const router = useRouter();
   const [shoppingList, setShoppingList] = useState<Recipe[] | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const supabase = createClientComponentClient();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
-      // Check user authentication status
-      const { data } = await supabase.auth.getSession();
-      if (data?.session?.user) {
-        const userEmail = data.session.user.email;
+      try {
+        // Check user authentication status
+        const { data } = await supabase.auth.getSession();
+        if (data?.session?.user) {
+          const userEmail = data.session.user.email;
 
-        // Fetch user-specific recipes
-        try {
-          const userRecipes = await getMyShoppingList(String(userEmail));
-          setShoppingList(userRecipes);
-          setUser({
-            email: data.session.user.email || "",
-          });
-        } catch (error) {
-          console.error("Error fetching user recipes:", error);
+          // Fetch user-specific recipes
+          try {
+            const userRecipes = await getMyShoppingList(String(userEmail));
+            setShoppingList(userRecipes);
+            setUser({
+              email: data.session.user.email || "",
+            });
+          } catch (error) {
+            console.error("Error fetching user recipes:", error);
+          } finally {
+            setLoading(false);
+          }
         }
+      } catch (error) {
+        console.error("Error checking user authentication:", error);
+        setLoading(false);
       }
     };
 
@@ -47,9 +51,10 @@ const ShoppingListPage = () => {
   };
 
   const handleExportClick = (recipe: Recipe) => {
-    const recipeText = `${recipe.title}: ${recipe.extendedIngredients
+    // Map ingredients to a formatted string with line breaks
+    const recipeText = `${recipe.title}:\n${recipe.extendedIngredients
       .map((ingredient) => ingredient.name)
-      .join(", ")}`;
+      .join("\n")}`;
 
     // Create a Blob from the text content
     const blob = new Blob([recipeText], { type: "text/plain" });
@@ -92,7 +97,9 @@ const ShoppingListPage = () => {
         Go Back
       </Button>
       <h1>Your Shopping List</h1>
-      {shoppingList ? (
+      {loading ? (
+        <p className={`${styles.loading} ${styles.pulsating}`}>Loading...</p>
+      ) : shoppingList ? (
         <>
           {shoppingList.map((item, index) => (
             <div key={index}>

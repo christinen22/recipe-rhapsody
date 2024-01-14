@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@nextui-org/react";
 import Logout from "../components/users/Logout";
-import getMyRecipes from "../components/users/MyRecipes";
+import { getMyRecipes } from "../../utils/actions";
 import styles from "./styles.module.css";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Recipe, User } from "../../types/recipe";
@@ -12,7 +12,6 @@ import { Image } from "react-bootstrap";
 import Login from "../components/users/Login";
 import Welcome from "../components/users/Welcome";
 import { useRouter } from "next/navigation";
-import Loading from "../components/loading/Loading";
 
 const MyPage = () => {
   const [recipes, setRecipes] = useState<Recipe[] | null>(null);
