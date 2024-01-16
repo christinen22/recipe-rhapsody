@@ -32,8 +32,6 @@ const mealtypes = [
   "Drink",
 ];
 
-// ... (other imports)
-
 function MealTypeRecipes() {
   const queryClient = useQueryClient();
   const router = useRouter();

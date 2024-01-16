@@ -131,17 +131,14 @@ export async function addToShoppingList(recipe: Recipe): Promise<AddRecipeRespon
       },
     ]);
 
-
-
     // Check for errors and throw an exception if there is one
     if (error) {
       throw new Error('Could not add ingredients.');
     }
 
-    // Return success if there are no errors
     return { success: true };
   } catch (error) {
-    // Return an error response if there's an exception
+
     return { success: false, error: 'Internal Server Error' };
   }
 }

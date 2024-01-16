@@ -1,5 +1,5 @@
 import { cache } from "react";
-import { RecipeIngredients, Recipes, RecipeSummary, Recipe, RandomRecipe, IngredientSearch } from '../types/recipe'
+import { Recipes, Recipe, RandomRecipe, IngredientSearch } from '../types/recipe'
 
 import { buildQueryParams, getHeaders } from "../utils/helpers";
 
@@ -127,39 +127,3 @@ export const getRecipeSummary = cache(
     }
 );
 
-/* 
-
-export const getRecipeIngredients = cache(
-    async (recipeId: number): Promise<RecipeIngredients> => {
-        const headers = getHeaders();
-
-        const res = await fetch(`${baseUrl}/recipes/${recipeId}/ingredientWidget.json`, {
-            headers
-        });
-
-        if (!res.ok) {
-
-            throw new Error("Failed to fetch data");
-        }
-
-        return res.json();
-    }
-);
-
-
-export const getRecipeInstructions = cache(
-    async (recipeId: number): Promise<RecipeAnalyzedInstruction[]> => {
-        const headers = getHeaders();
-
-        const res = await fetch(`${baseUrl}/recipes/${recipeId}/analyzedInstructions`, {
-            headers
-        });
-
-        if (!res.ok) {
-
-            throw new Error("Failed to fetch data");
-        }
-
-        return res.json();
-    }
-); */

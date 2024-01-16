@@ -51,12 +51,12 @@ const ShoppingListPage = () => {
   };
 
   const handleExportClick = (recipe: Recipe) => {
-    // Map ingredients to a formatted string with line breaks
+    // Map ingredients to form a string with line breaks
     const recipeText = `${recipe.title}:\n${recipe.extendedIngredients
       .map((ingredient) => ingredient.name)
       .join("\n")}`;
 
-    // Create a Blob from the text content
+    // Create a Blob (binary large object) from the text content
     const blob = new Blob([recipeText], { type: "text/plain" });
 
     // Create a download link and trigger the download
