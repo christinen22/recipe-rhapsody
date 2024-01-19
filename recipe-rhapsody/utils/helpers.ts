@@ -1,11 +1,3 @@
-/**
- * 
- * Utility functions
- * 
- * @param params 
- * @returns 
- */
-
 //Function that takes objects params as a argument and clean up url and returns a query-string
 
 export const buildQueryParams = (params: Record<string, any>, additionalParams: Record<string, any> = {}) => {

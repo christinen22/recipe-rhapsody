@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { toast } from "react-toastify";
+
 
 export async function POST(request: Request) {
     const saved = await request.json();
@@ -21,7 +23,7 @@ export async function POST(request: Request) {
 
     if (existingRecipe.data) {
         // Recipe already saved
-        console.log('Recipe is already saved:', existingRecipe.data);
+        toast.success('Recipe is already saved:', existingRecipe.data);
         return NextResponse.json({ error: 'Recipe is already saved.' });
     }
 
@@ -33,11 +35,9 @@ export async function POST(request: Request) {
         });
 
     if (error) {
-        console.error('Error adding recipe to Supabase:', error);
+        toast.error('Error adding recipe to Supabase');
         return NextResponse.json({ error: 'Could not add the new recipe.' });
     }
-
-    console.log('Recipe added successfully:', data);
 
     return NextResponse.json({ data });
 }
@@ -57,7 +57,6 @@ export async function GET(request: Request) {
         .eq('user_email', session?.user.email);
 
     if (error) {
-        console.error('Error fetching saved recipes from Supabase:', error);
         return NextResponse.json({ error: 'Failed to fetch saved recipes.' });
     }
 }

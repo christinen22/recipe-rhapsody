@@ -1,6 +1,7 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { toast } from "react-toastify";
 
 export default async function MyPageLayout({
   children,
@@ -11,9 +12,7 @@ export default async function MyPageLayout({
   const { data } = await supabase.auth.getSession();
 
   if (!data.session) {
-    console.log("no user logged in?", data);
-  } else {
-    console.log("user logged in", data);
+    toast.error("You have to log in to your account");
   }
 
   return <>{children}</>;

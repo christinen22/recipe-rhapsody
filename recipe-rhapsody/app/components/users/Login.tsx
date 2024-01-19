@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import styles from "./Users.module.css";
-import Link from "next/link";
 import ForgotPassword from "./ForgotPassword";
 
 import AuthForm from "../../(auth)/AuthForm";

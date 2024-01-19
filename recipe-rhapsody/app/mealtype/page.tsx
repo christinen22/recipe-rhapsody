@@ -48,7 +48,6 @@ function MealTypeRecipes() {
 
   const handleClick = (mealtype: string) => {
     router.push(`/mealtype/${encodeURIComponent(mealtype)}`);
-    //queryClient.invalidateQueries({ queryKey: ["mealtype", mealtype] });
   };
 
   return (

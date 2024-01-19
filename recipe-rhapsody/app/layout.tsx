@@ -6,7 +6,6 @@ import Footer from "./components/footer/Footer";
 import Search from "./components/search/Search";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-//import { roboto } from "./fonts";
 
 export const metadata: Metadata = {
   title: "Recipe Rhapsody",

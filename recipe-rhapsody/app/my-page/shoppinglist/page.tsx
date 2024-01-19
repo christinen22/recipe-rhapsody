@@ -8,6 +8,7 @@ import { getMyShoppingList } from "../../../utils/actions";
 import { Recipe } from "../../../types/recipe";
 import { User } from "../../../types/recipe";
 import { Button } from "react-bootstrap";
+import { toast } from "react-toastify";
 
 const ShoppingListPage = () => {
   const router = useRouter();
@@ -83,9 +84,8 @@ const ShoppingListPage = () => {
         setShoppingList((prevList) =>
           prevList ? prevList.filter((item) => item.id !== recipe.id) : []
         );
-        console.log("Recipe deleted successfully!");
+        toast.success("Recipe deleted successfully!");
       }
-      console.log("Recipe deleted successfully!");
     } catch (error) {
       console.error("Error deleting recipe:", error);
     }

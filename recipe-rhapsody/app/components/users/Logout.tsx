@@ -15,9 +15,6 @@ const Logout = () => {
     if (!error) {
       router.push("/login");
     }
-    if (error) {
-      console.log(error);
-    }
   };
   return (
     <div>

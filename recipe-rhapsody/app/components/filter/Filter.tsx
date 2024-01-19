@@ -28,8 +28,6 @@ const Filter: React.FC<DietaryFilterProps> = ({ onFilterChange }) => {
       selectedPreferences.push("vegan");
     }
 
-    console.log("Selected Preferences:", selectedPreferences);
-
     onFilterChange(selectedPreferences);
   };
 

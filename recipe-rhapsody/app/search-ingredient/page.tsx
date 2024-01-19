@@ -8,7 +8,6 @@ import styles from "./styles.module.css";
 import Link from "next/link";
 import SaveRecipeButton from "../recipes/[id]/SaveRecipeBtn";
 import { IngredientSearch, Recipe } from "../../types/recipe";
-import Loading from "../components/loading/Loading";
 
 const SearchIngredients = () => {
   const [recipes, setRecipes] = useState<IngredientSearch[]>([]);
@@ -24,7 +23,6 @@ const SearchIngredients = () => {
       const data = await getRecipesByIngredients(String(ingredients));
       setRecipes(data);
       setLoading(false);
-      console.log("API Response:", data);
     } catch (error) {
       console.error("Error fetching recipes:", error);
       setLoading(false);

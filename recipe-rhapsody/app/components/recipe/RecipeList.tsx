@@ -32,7 +32,6 @@ const RecipeList = ({ query }: RecipeListProps) => {
         console.error("Failed to fetch saved recipe IDs");
       }
       const data = response.data || [];
-      console.log("Saved recipe IDs:", data);
       setSavedRecipeIds(data);
       setSavedRecipeIdsLoaded(true);
     } catch (error) {

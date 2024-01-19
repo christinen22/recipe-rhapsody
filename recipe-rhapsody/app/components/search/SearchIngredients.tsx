@@ -25,7 +25,6 @@ const SearchIngredients = () => {
     queryClient.invalidateQueries({
       queryKey: ["search-by-ingredients", { ingredients }],
     });
-    console.log("useEffect triggered with ingredients:", ingredientInput);
   }, [ingredients, queryClient]);
 
   const handleSubmit = async (e: React.FormEvent) => {

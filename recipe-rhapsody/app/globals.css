@@ -24,16 +24,6 @@
 }
 
 
-/* /* Mixins using CSS variables */
-/* @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-} */ 
-
 .selector {
   animation: fadeIn 1s ease-in-out;
 }

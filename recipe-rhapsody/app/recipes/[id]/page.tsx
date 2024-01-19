@@ -21,7 +21,6 @@ const SingleRecipePage = () => {
       try {
         if (id) {
           const data = await getRecipeSummary(Number(id));
-          console.log(data);
           setRecipe(data);
         }
       } catch (error) {

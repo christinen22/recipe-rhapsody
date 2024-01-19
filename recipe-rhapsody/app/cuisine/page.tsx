@@ -102,7 +102,6 @@ function CuisineRecipes() {
                 searchParams.get("query") === cuisine ? styles.activeButton : ""
               }`}
               onClick={() => handleClick(cuisine)}
-              /*   active={searchParams.get("query") === cuisine} */
             >
               {cuisine}
             </Button>
