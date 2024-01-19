@@ -19,7 +19,6 @@ const links = [
 const Navigation: React.FC = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-
   const router = useRouter();
 
   const handleClick = () => {

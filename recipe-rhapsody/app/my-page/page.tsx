@@ -12,6 +12,7 @@ import { Image } from "react-bootstrap";
 import Login from "../components/users/Login";
 import Welcome from "../components/users/Welcome";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const MyPage = () => {
   const [recipes, setRecipes] = useState<Recipe[] | null>(null);
@@ -56,15 +57,14 @@ const MyPage = () => {
         .eq("recipe_id", recipe.id);
 
       if (error) {
-        console.error("Error deleting recipe:", error);
+        toast.error("Error deleting recipe, try again.");
       } else {
         // Remove the deleted recipe from the state
         setRecipes((prevList) =>
           prevList ? prevList.filter((item) => item.id !== recipe.id) : []
         );
-        console.log("Recipe deleted successfully!");
+        toast.success("Recipe deleted successfully!");
       }
-      console.log("Recipe deleted successfully!");
     } catch (error) {
       console.error("Error deleting recipe:", error);
     }
