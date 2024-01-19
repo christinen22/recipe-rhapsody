@@ -7,7 +7,6 @@ import { getRecipes } from "../../../lib/spoonacular";
 import RecipeList from "../../components/recipe/RecipeList";
 import { Button } from "@nextui-org/react";
 import { useQuery } from "@tanstack/react-query";
-import Loading from "../../components/loading/Loading";
 
 function SingleCuisine() {
   const { cuisine } = useParams();
