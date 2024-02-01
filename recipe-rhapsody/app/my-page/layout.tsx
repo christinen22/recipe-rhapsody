@@ -11,9 +11,5 @@ export default async function MyPageLayout({
   const supabase = createServerComponentClient({ cookies });
   const { data } = await supabase.auth.getSession();
 
-  if (!data.session) {
-    toast.error("You have to log in to your account");
-  }
-
   return <>{children}</>;
 }
