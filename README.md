@@ -1,1 +1,7 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/plurHXAj)
+In this project, I set out to create a web application to provide recipe inspiration for users lacking culinary ideas. The journey began with a pre-study phase, focusing on defining goals, identifying the target audience, and creating wireframes using Figma. The project aimed for a clean and attractive design, incorporating neutral colors and simple yet appealing fonts.
+
+Tech stack
+Next.js
+TypeScript
+Spoonacular API
+Supabase
